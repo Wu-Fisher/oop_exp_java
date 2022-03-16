@@ -6,4 +6,9 @@ public class BloodProps extends AbstractProps {
         super(locationX, locationY, speedX, speedY);
     }
 
+    @Override
+    public void effectCrash() {
+        System.out.println("GetRecover:" + Integer.toString(getHp()));
+    }
+
 }

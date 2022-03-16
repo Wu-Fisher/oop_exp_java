@@ -302,9 +302,9 @@ public class Game extends JPanel {
                 if (probs instanceof BloodProps)
                     heroAircraft.recoverHp(probs.getHp());
                 else if (probs instanceof BombProps) {
-                    System.out.println("FireSupplyactive!");
+                    probs.effectCrash();
                 } else if (probs instanceof BulletProps) {
-                    System.out.println("FireSupplyactive!");
+                    probs.effectCrash();
                 }
                 probs.vanish();
             }

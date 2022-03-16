@@ -3,7 +3,7 @@ package edu.hitsz.props;
 import edu.hitsz.application.Main;
 import edu.hitsz.basic.AbstractFlyingObject;
 
-public class AbstractProps extends AbstractFlyingObject {
+public abstract class AbstractProps extends AbstractFlyingObject {
 
     protected static int hp;
 
@@ -37,5 +37,7 @@ public class AbstractProps extends AbstractFlyingObject {
             vanish();
         }
     }
+
+    public abstract void effectCrash();
 
 }
