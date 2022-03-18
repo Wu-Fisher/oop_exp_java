@@ -1,7 +1,7 @@
 package edu.hitsz.application;
 
 import edu.hitsz.aircraft.*;
-import edu.hitsz.bullet.AbstractBullet;
+import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.props.*;
 import edu.hitsz.basic.AbstractFlyingObject;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
@@ -34,14 +34,15 @@ public class Game extends JPanel {
 
     private final HeroAircraft heroAircraft;
     private final List<AbstractAircraft> enemyAircrafts;
-    private final List<AbstractBullet> heroBullets;
-    private final List<AbstractBullet> enemyBullets;
+    private final List<BaseBullet> heroBullets;
+    private final List<BaseBullet> enemyBullets;
     private final List<AbstractProps> leftProps;
     private EnemyFactory enemyFactory;
     private PropsFactory propsFactory;
 
     private int enemyMaxNumber = 5;
-
+    private int bossScore = 1000;
+    private boolean isBoss = false;
     private boolean gameOverFlag = false;
     private int score = 0;
     private int time = 0;
@@ -52,6 +53,7 @@ public class Game extends JPanel {
     private int cycleDuration = 600;
     private int cycleTime = 0;
     private int cycleTime_b = 0;
+
     private int score_moe = 20;
     private int score_Elite = 40;
     private int score_Boss = 100;
@@ -61,6 +63,10 @@ public class Game extends JPanel {
     private int health_Easy_Up = 50;
 
     private final Random random = new Random();
+
+    private int hero_hp = 100;
+    private int hero_shootnum = 1;
+    private int power = 30;
 
     public Game() {
         heroAircraft = HeroAircraft.getInstance(
@@ -72,7 +78,9 @@ public class Game extends JPanel {
         heroBullets = new LinkedList<>();
         enemyBullets = new LinkedList<>();
         leftProps = new LinkedList<>();
+        // 难度选择修改处
         // 简单模式工厂
+        // 产生工厂，设定道具
         enemyFactory = new EasyFactory();
         propsFactory = new EasyProFactory();
         AbstractProps.setHp(health_Easy_Up);
@@ -103,18 +111,19 @@ public class Game extends JPanel {
             if (timeCountAndNewCycleJudge()) {
                 System.out.println(time);
                 // 新敌机产生
-                if (enemyAircrafts.size() < enemyMaxNumber) {
-                    // if (random.nextInt(10) > 6)
-                    // enemyAircrafts.add(enemyFactory.callEnemy("elite"));
-                    // else
-                    // enemyAircrafts.add(enemyFactory.callEnemy("mob"));
+                if (!isBoss && score >= bossScore) {
+                    enemyAircrafts.add(enemyFactory.callEnemy("boss"));
+                    isBoss = true;
+                } else if (enemyAircrafts.size() < enemyMaxNumber) {
                     String str = EnemySelector.selectoString_easy();
                     enemyAircrafts.add(enemyFactory.callEnemy(str));
                 }
                 // // 飞机射出子弹
                 // shootAction();
             }
-
+            // 子弹采用新的周期
+            // TODO 考虑敌机和自己的也分开
+            // 后面改为多线程之后可能需要
             if (timeCountAndNewCycleJudge_bullet()) {
                 shootAction();
             }
@@ -170,17 +179,6 @@ public class Game extends JPanel {
         }
     }
 
-    // private boolean timeCountAndNewCycleJudge(int cycleTime, int n) {
-    // cycleTime += timeInterval * n;
-    // if (cycleTime >= cycleDuration && cycleTime - timeInterval < cycleTime) {
-    // // 跨越到新的周期
-    // cycleTime %= cycleDuration;
-    // return true;
-    // } else {
-    // return false;
-    // }
-    // }
-
     private boolean timeCountAndNewCycleJudge_bullet() {
         cycleTime_b += timeInterval * 2;
         if (cycleTime_b >= cycleDuration && cycleTime_b - timeInterval < cycleTime_b) {
@@ -212,10 +210,10 @@ public class Game extends JPanel {
     }
 
     private void bulletsMoveAction() {
-        for (AbstractBullet bullet : heroBullets) {
+        for (BaseBullet bullet : heroBullets) {
             bullet.forward();
         }
-        for (AbstractBullet bullet : enemyBullets) {
+        for (BaseBullet bullet : enemyBullets) {
             bullet.forward();
         }
     }
@@ -241,8 +239,21 @@ public class Game extends JPanel {
     private void crashCheckAction() {
         // TODO 敌机子弹攻击英雄
 
+        for (BaseBullet bullet : enemyBullets) {
+            if (bullet.notValid()) {
+                continue;
+            }
+            if (heroAircraft.crash(bullet)) {
+                // 英雄机撞击到敌机子弹
+                // 英雄机损失一定生命值
+                heroAircraft.decreaseHp(bullet.getPower());
+
+                System.out.println("GET HIT!");
+                bullet.vanish();
+            }
+        }
         // 英雄子弹攻击敌机
-        for (AbstractBullet bullet : heroBullets) {
+        for (BaseBullet bullet : heroBullets) {
             if (bullet.notValid()) {
                 continue;
             }
@@ -259,7 +270,11 @@ public class Game extends JPanel {
                     bullet.vanish();
                     if (enemyAircraft.notValid()) {
                         // TODO 获得分数，产生道具补给
-                        if (enemyAircraft instanceof EliteEnemy) {
+                        if (enemyAircraft instanceof BossEnemy) {
+                            bossScore *= 2;
+                            isBoss = false;
+                            score += 100;
+                        } else if (enemyAircraft instanceof EliteEnemy) {
                             score += score_Elite;
                             if (isPercent(precent_Props_Easy)) {
                                 int x = enemyAircraft.getLocationX();
@@ -275,20 +290,6 @@ public class Game extends JPanel {
                     enemyAircraft.vanish();
                     heroAircraft.decreaseHp(Integer.MAX_VALUE);
                 }
-            }
-        }
-
-        for (AbstractBullet bullet : enemyBullets) {
-            if (bullet.notValid()) {
-                continue;
-            }
-            if (heroAircraft.crash(bullet)) {
-                // 英雄机撞击到敌机子弹
-                // 英雄机损失一定生命值
-                heroAircraft.decreaseHp(bullet.getPower());
-
-                System.out.println("GET HIT!");
-                bullet.vanish();
             }
         }
 

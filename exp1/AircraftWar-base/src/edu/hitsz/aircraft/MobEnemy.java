@@ -1,8 +1,7 @@
 package edu.hitsz.aircraft;
 
-import edu.hitsz.application.Game;
 import edu.hitsz.application.Main;
-import edu.hitsz.bullet.AbstractBullet;
+import edu.hitsz.bullet.BaseBullet;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class MobEnemy extends AbstractAircraft {
     }
 
     @Override
-    public List<AbstractBullet> shoot() {
+    public List<BaseBullet> shoot() {
         return new LinkedList<>();
     }
 

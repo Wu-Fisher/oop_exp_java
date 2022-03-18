@@ -24,6 +24,14 @@ public class EasyFactory extends EnemyFactory {
                     0,
                     6,
                     60, 2, 10);
+        }else if(type.equals("boss"))
+        {
+            enemy = new BossEnemy(
+                    (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.ELITE_ENEMY_IMAGE.getWidth())) * 1,
+                    (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1) * 1,
+                    2,
+                    0,
+                    400, 6, 20);
         }
         return enemy;
     }

@@ -12,7 +12,7 @@ abstract class AbstractFlyingObject
     # height:int
     # isValid:boolean
 
-    + FlyingObject(int locationX, int locationY, int speedX, int speedY):void
+    + FlyingObject(int locationX, int locationY, int speedX, int speedY)
     + forward():void
     + crash(FlyingObject flyingObject):boolean
     + setLocation(double locationX, double locationY):void
@@ -27,25 +27,25 @@ abstract class AbstractFlyingObject
 }
 abstract class AbstractAircraft
 {
-	# axHp:int
+	# maxHp:int
     # hp:int
-    + AbstractAircraft(int locationX, int locationY, int speedX, int speedY, int hp):void
+    + AbstractAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
     + decreaseHp(int decrease):void
     + recoverHp(int recover):void
     + getHp():int
     + {abstract} shoot():List<Bullet>
  }
 
-class AbstractBullet
+class BaseBullet
 {
     - power:int
-    + Bullet(int locationX, int locationY, int speedX, int speedY, int power):void
+    + Bullet(int locationX, int locationY, int speedX, int speedY, int power)
     + forward():void
 	+ getPower():int
 }
 
 AbstractFlyingObject <|-- AbstractAircraft
-AbstractFlyingObject <|-- AbstractBullet
+AbstractFlyingObject <|-- BaseBullet
 AbstractFlyingObject <|-- AbstractProps
 
 AbstractAircraft <|-- HeroAircraft
@@ -53,8 +53,8 @@ AbstractAircraft <|-- MobEnemy
 AbstractAircraft <|-- EliteEnemy
 AbstractAircraft <|-- BossEnemy
 
-AbstractBullet <|-- HeroBullet
-AbstractBullet <|-- EnemyBullet
+BaseBullet <|-- HeroBullet
+BaseBullet <|-- EnemyBullet
 AbstractProps <|-- BloodProps
 AbstractProps <|-- BulletProps
 AbstractProps <|-- BombProps
@@ -67,16 +67,16 @@ class HeroAircraft {
     - power:int
     - direction:int
     - myHero:HeroAircraft
-    - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp):HeroAircraft
-    - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power):HeroAircraft
-    + getInstance(int locationX, int locationY, int speedX, int speedY, int hp):HeroAircraft
-    + getInstance(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power):HeroAircraft
+    - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+    - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power)
+    + getInstance(int locationX, int locationY, int speedX, int speedY, int hp)
+    + getInstance(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power)
     + forward():void
     + shoot():List<Bullet>
 }
 
 class MobEnemy {
-    + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp):void
+    + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<Bullet>
 }
@@ -87,8 +87,8 @@ class EliteEnemy
     - direction:int
     - shootNum:int
     - power:int
-    + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp):void
-    + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum, int power):void
+    + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum, int power)
     + forward():void
     + shoot():List<Bullet>
 }
@@ -100,7 +100,7 @@ class BossEnemy
     - shootNum:int
     - power:int
     + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp):void
-    + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum, int power):void
+    + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum, int power)
     + forward():void
     + shoot():List<Bullet>
 }
@@ -128,33 +128,21 @@ class AbstractProps{
 
 class BloodProps
 {
-+ BloodProps(int locationX, int locationY, int speedX, int speedY):void
++ BloodProps(int locationX, int locationY, int speedX, int speedY)
 + effectCrash():void
 }
 
 class BulletProps
 {
-+ BulletProps(int locationX, int locationY, int speedX, int speedY):void
++ BulletProps(int locationX, int locationY, int speedX, int speedY)
 + effectCrash():void
 }
 
 class BombProps
 {
-+ BombProps(int locationX, int locationY, int speedX, int speedY):void
++ BombProps(int locationX, int locationY, int speedX, int speedY)
 + effectCrash():void
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
