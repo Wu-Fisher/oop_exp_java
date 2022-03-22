@@ -64,15 +64,15 @@ public class Game extends JPanel {
 
     private final Random random = new Random();
 
-    private int hero_hp = 100;
-    private int hero_shootnum = 1;
-    private int power = 30;
+    private int hero_hp = 1000;
+    private int hero_shootnum = 2;
+    private int power_hero = 30;
 
     public Game() {
         heroAircraft = HeroAircraft.getInstance(
                 Main.WINDOW_WIDTH / 2,
                 Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight(),
-                0, 0, 100, 1, 30);
+                0, 0, hero_hp, hero_shootnum, power_hero);
 
         enemyAircrafts = new LinkedList<>();
         heroBullets = new LinkedList<>();

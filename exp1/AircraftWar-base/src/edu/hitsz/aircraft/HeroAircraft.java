@@ -52,16 +52,20 @@ public class HeroAircraft extends AbstractAircraft {
     }
 
     public static HeroAircraft getInstance(int locationX, int locationY, int speedX, int speedY, int hp) {
-        if (myHero == null) {
-            myHero = new HeroAircraft(locationX, locationY, speedX, speedY, hp);
+        synchronized (HeroAircraft.class) {
+            if (myHero == null) {
+                myHero = new HeroAircraft(locationX, locationY, speedX, speedY, hp);
+            }
         }
         return myHero;
     }
 
     public static HeroAircraft getInstance(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum,
             int power) {
-        if (myHero == null) {
-            myHero = new HeroAircraft(locationX, locationY, speedX, speedY, hp, shootnum, power);
+        synchronized (HeroAircraft.class) {
+            if (myHero == null) {
+                myHero = new HeroAircraft(locationX, locationY, speedX, speedY, hp, shootnum, power);
+            }
         }
         return myHero;
     }
