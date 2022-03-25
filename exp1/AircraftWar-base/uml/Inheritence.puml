@@ -67,10 +67,10 @@ class HeroAircraft {
     - power:int
     - direction:int
     - myHero:HeroAircraft
-    - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+    ' - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
     - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power)
-    + getInstance(int locationX, int locationY, int speedX, int speedY, int hp)
-    + getInstance(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power)
+    ' + getInstance(int locationX, int locationY, int speedX, int speedY, int hp):AbstractAircraft
+    + {static} getInstance(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power):abstractAircraft
     + forward():void
     + shoot():List<Bullet>
 }
@@ -87,7 +87,7 @@ class EliteEnemy
     - direction:int
     - shootNum:int
     - power:int
-    + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    ' + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum, int power)
     + forward():void
     + shoot():List<Bullet>
@@ -99,7 +99,7 @@ class BossEnemy
     - direction:int
     - shootNum:int
     - power:int
-    + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp):void
+    ' + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp):void
     + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum, int power)
     + forward():void
     + shoot():List<Bullet>
@@ -117,7 +117,7 @@ class EnemyBullet {
      int speedX, int speedY, int power):void
 }
 
-class AbstractProps{
+abstract class AbstractProps{
     # hp:int
     + AbstractProps(int locationX, int locationY, int speedX, int speedY):void
     + getHp():int

@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class HeroAircraft {
+    # axHp:int
+    # hp:int
+    - shootNum:int
+    - power:int
+    - direction:int
+    - myHero:HeroAircraft
+    ' - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+    - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power)
+    ' + getInstance(int locationX, int locationY, int speedX, int speedY, int hp):AbstractAircraft
+    + {static} getInstance(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power):abstractAircraft
+    + forward():void
+    + shoot():List<Bullet>
+}
+
+
+
+HeroAircraft -> HeroAircraft
+
+Game -> HeroAircraft
+
+
+class Game{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@enduml
