@@ -23,7 +23,6 @@ class HardFactory{
 }
 
 abstract class AbstractAircraft{
-
 }
 AbstractAircraft <|-- MobEnemy
 AbstractAircraft <|-- EliteEnemy
@@ -42,7 +41,7 @@ HardFactory ..>  EliteEnemy
 HardFactory ..>  BossEnemy
 
 class MobEnemy {
-    ' + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     ' + forward():void
     ' + shoot():List<Bullet>
 }
@@ -54,7 +53,7 @@ class EliteEnemy
     ' - shootNum:int
     ' - power:int
     ' ' + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
-    ' + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum, int power)
+    + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum, int power)
     ' + forward():void
     ' + shoot():List<Bullet>
 }
@@ -66,7 +65,7 @@ class BossEnemy
     ' - shootNum:int
     ' - power:int
     ' ' + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp):void
-    ' + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum, int power)
+    + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum, int power)
     ' + forward():void
     ' + shoot():List<Bullet>
 }

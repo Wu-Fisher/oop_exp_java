@@ -45,18 +45,26 @@ HardProFactory..>BombProps
 
 
 abstract class AbstractProps{
+    + AbstractProps(int locationX, int locationY, int speedX, int speedY):void
+    +{abstract}effectCrash():void
 }
 
 class BloodProps
 {
+    + BloodProps(int locationX, int locationY, int speedX, int speedY)
+    + effectCrash():void
 }
 
 class BulletProps
 {
+    + BulletProps(int locationX, int locationY, int speedX, int speedY)
+    + effectCrash():void
 }
 
 class BombProps
 {
+    + BombProps(int locationX, int locationY, int speedX, int speedY)
+    + effectCrash():void
 }
 
 
