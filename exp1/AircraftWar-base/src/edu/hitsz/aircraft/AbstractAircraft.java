@@ -52,4 +52,10 @@ public abstract class AbstractAircraft extends AbstractFlyingObject {
      */
     public abstract List<BaseBullet> shoot();
 
+    public int getMaxHp() {
+        return maxHp;
+    }
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
 }

@@ -4,6 +4,14 @@ import edu.hitsz.bullet.BaseBullet;
 
 import java.util.List;
 
+/**
+ * @author Wufisher
+ */
 public interface AbstractShootStrategy {
-    public abstract List<BaseBullet> shoot();
+
+    /**
+     * @return 返回一个子弹列表
+     * 方法用于更新飞机设计的策略
+     */
+    List<BaseBullet> shoot();
 }

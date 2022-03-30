@@ -11,6 +11,10 @@ public class LineShootStrategy implements AbstractShootStrategy {
     int power = 10;
     int speed = 5;
 
+    /**
+     * @return List<BaseBullet>
+     */
+    @Override
     public List<BaseBullet> shoot() {
         List<BaseBullet> res = new LinkedList<>();
         return res;
