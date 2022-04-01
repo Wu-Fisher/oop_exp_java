@@ -6,9 +6,12 @@ import edu.hitsz.bullet.*;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @author Wufisher
+ */
 public class BossEnemy extends AbstractAircraft {
 
-    /** 攻击方式 */
+    /* 攻击方式 */
 
     /**
      * 子弹一次发射数量
@@ -19,14 +22,6 @@ public class BossEnemy extends AbstractAircraft {
      * 子弹伤害
      */
     private int power = 20;
-
-    /**
-     * 子弹射击方向 (向上发射：1，向下发射：-1)
-     *
-     * <=====按照人类视角应该是写反了吧
-     *
-     */
-    private int direction = 1;
 
     public BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
@@ -51,14 +46,21 @@ public class BossEnemy extends AbstractAircraft {
     }
 
     @Override
-    /**
-     * 通过射击产生子弹
-     *
-     * @return 射击出的子弹List
+    /*
+      通过射击产生子弹
+
+      @return 射击出的子弹List
      */
     public List<BaseBullet> shoot() {
         List<BaseBullet> res = new LinkedList<>();
         int x = this.getLocationX();
+        /*
+          子弹射击方向 (向上发射：1，向下发射：-1)
+
+          <=====按照人类视角应该是写反了吧
+
+         */
+        int direction = 1;
         int y = this.getLocationY() + direction * 2;
         int speedX = 0;
         int speedY = this.getSpeedY() + direction * 10;

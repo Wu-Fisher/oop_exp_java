@@ -25,11 +25,6 @@ public class HeroAircraft extends AbstractAircraft {
      */
     private int power = 30;
 
-    /**
-     * 子弹射击方向 (向上发射：1，向下发射：-1)
-     */
-    private int direction = -1;
-
     private int shootSpeed = 8;
 
     private static HeroAircraft myHero;
@@ -76,14 +71,18 @@ public class HeroAircraft extends AbstractAircraft {
     }
 
     @Override
-    /**
-     * 通过射击产生子弹
-     * 
-     * @return 射击出的子弹List
+    /*
+      通过射击产生子弹
+
+      @return 射击出的子弹List
      */
     public List<BaseBullet> shoot() {
         List<BaseBullet> res = new LinkedList<>();
         int x = this.getLocationX();
+        /*
+          子弹射击方向 (向上发射：1，向下发射：-1)
+         */
+        int direction = -1;
         int y = this.getLocationY() + direction * 2;
         int speedX = 0;
         int speedY = this.getSpeedY() + direction * shootSpeed;
