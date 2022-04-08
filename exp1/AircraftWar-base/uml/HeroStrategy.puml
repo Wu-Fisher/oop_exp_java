@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Game{
+}
+class HeroAircraft {
+    # axHp:int
+    # hp:int
+    - shootNum:int
+    - power:int
+    - direction:int
+    - myHero:HeroAircraft
+    - shootStrategy:AbstractShootStrategy
+    ' - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+    - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power)
+    ' + getInstance(int locationX, int locationY, int speedX, int speedY, int hp):AbstractAircraft
+    + {static} getInstance(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power):abstractAircraft
+    + forward():void
+    + shoot():List<Bullet>
+    + setStrategy(AbstractShootStrategy shootStrategy):void
+}
+Game-->HeroAircraft
+Interface AbstractShootStrategy {
+    + shoot():List<Bullet>
+}
+HeroAircraft o--> AbstractShootStrategy
+
+class LinearShootStrategy implements AbstractShootStrategy {
+    + shoot():List<Bullet>
+}
+class SpreadShootStrategy implements AbstractShootStrategy {
+    + shoot():List<Bullet>
+}
+
+
+@enduml

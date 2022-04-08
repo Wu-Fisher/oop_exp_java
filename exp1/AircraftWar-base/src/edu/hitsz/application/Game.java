@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.*;
-
+import edu.hitsz.strategy.*;
 /**
  * 游戏主面板，游戏启动
  *
@@ -41,7 +41,7 @@ public class Game extends JPanel {
     private PropsFactory propsFactory;
 
     private int enemyMaxNumber = 5;
-    private int bossScore = 1000;
+    private int bossScoreThreshold = 1500;
     private boolean isBoss = false;
     private boolean gameOverFlag = false;
     private int score = 0;
@@ -73,7 +73,7 @@ public class Game extends JPanel {
                 Main.WINDOW_WIDTH / 2,
                 Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight(),
                 0, 0, hero_hp, hero_shootnum, power_hero);
-
+        heroAircraft.setStrategy(new LineShootStrategy());
         enemyAircrafts = new LinkedList<>();
         heroBullets = new LinkedList<>();
         enemyBullets = new LinkedList<>();
@@ -111,7 +111,7 @@ public class Game extends JPanel {
             if (timeCountAndNewCycleJudge()) {
                 System.out.println(time);
                 // 新敌机产生
-                if (!isBoss && score >= bossScore) {
+                if (!isBoss && score >= bossScoreThreshold) {
                     enemyAircrafts.add(enemyFactory.callEnemy("boss"));
                     isBoss = true;
                 } else if (enemyAircrafts.size() < enemyMaxNumber) {
@@ -271,7 +271,7 @@ public class Game extends JPanel {
                     if (enemyAircraft.notValid()) {
                         // TODO 获得分数，产生道具补给
                         if (enemyAircraft instanceof BossEnemy) {
-                            bossScore *= 2;
+                            bossScoreThreshold *= bossScoreThreshold;
                             isBoss = false;
                             score += 100;
                         } else if (enemyAircraft instanceof EliteEnemy) {
@@ -281,8 +281,9 @@ public class Game extends JPanel {
                                 int y = enemyAircraft.getLocationY();
                                 leftProps.add(propsFactory.callProps(PropsSelector.selectoString_easy(), x, y));
                             }
-                        } else
+                        } else {
                             score += score_moe;
+                        }
                     }
                 }
                 // 英雄机 与 敌机 相撞，均损毁
@@ -300,12 +301,14 @@ public class Game extends JPanel {
             }
             if (heroAircraft.crash(probs)) {
 
-                if (probs instanceof BloodProps)
+                if (probs instanceof BloodProps) {
                     heroAircraft.recoverHp(probs.getHp());
+                }
                 else if (probs instanceof BombProps) {
                     probs.effectCrash();
                 } else if (probs instanceof BulletProps) {
                     probs.effectCrash();
+                    heroAircraft.setStrategy(new SpreadShootStrategy());
                 }
                 probs.vanish();
             }

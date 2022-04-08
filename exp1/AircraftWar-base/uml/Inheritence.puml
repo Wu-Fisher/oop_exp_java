@@ -67,12 +67,14 @@ class HeroAircraft {
     - power:int
     - direction:int
     - myHero:HeroAircraft
+    - shootStrategy:AbstractShootStrategy
     ' - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
     - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power)
     ' + getInstance(int locationX, int locationY, int speedX, int speedY, int hp):AbstractAircraft
     + {static} getInstance(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power):abstractAircraft
     + forward():void
     + shoot():List<Bullet>
+    + setStrategy(AbstractShootStrategy shootStrategy):void
 }
 
 class MobEnemy {
@@ -87,10 +89,12 @@ class EliteEnemy
     - direction:int
     - shootNum:int
     - power:int
+    - shootStrategy:AbstractShootStrategy
     ' + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum, int power)
     + forward():void
     + shoot():List<Bullet>
+    + setStrategy(AbstractShootStrategy shootStrategy):void
 }
 
 class BossEnemy
@@ -99,10 +103,12 @@ class BossEnemy
     - direction:int
     - shootNum:int
     - power:int
+    - shootStrategy:AbstractShootStrategy
     ' + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp):void
     + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum, int power)
     + forward():void
     + shoot():List<Bullet>
+    + setStrategy(AbstractShootStrategy shootStrategy):void
 }
 
 

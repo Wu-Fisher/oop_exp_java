@@ -1,5 +1,5 @@
 package edu.hitsz.aircraft;
-
+import edu.hitsz.strategy.*;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
 
@@ -58,4 +58,6 @@ public abstract class AbstractAircraft extends AbstractFlyingObject {
     public void setHp(int hp) {
         this.hp = hp;
     }
+
+    public abstract void  setStrategy(AbstractShootStrategy strategy);
 }

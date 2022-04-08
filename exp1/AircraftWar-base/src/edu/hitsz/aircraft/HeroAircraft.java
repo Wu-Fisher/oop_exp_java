@@ -5,7 +5,7 @@ import edu.hitsz.bullet.HeroBullet;
 
 import java.util.LinkedList;
 import java.util.List;
-
+import edu.hitsz.strategy.*;
 /**
  * 英雄飞机，游戏玩家操控
  * 
@@ -24,11 +24,13 @@ public class HeroAircraft extends AbstractAircraft {
      * 子弹伤害
      */
     private int power = 30;
-
+    private int direction = -1;
     private int shootSpeed = 8;
 
-    private static HeroAircraft myHero;
+    private AbstractShootStrategy shootStrategy;
 
+
+    private static HeroAircraft myHero;
     /**
      * @param locationX 英雄机位置x坐标
      * @param locationY 英雄机位置y坐标
@@ -69,6 +71,11 @@ public class HeroAircraft extends AbstractAircraft {
     public void forward() {
         // 英雄机由鼠标控制，不通过forward函数移动
     }
+    @Override
+    public void setStrategy
+            (AbstractShootStrategy shootStrategy) {
+        this.shootStrategy = shootStrategy;
+    }
 
     @Override
     /*
@@ -77,7 +84,9 @@ public class HeroAircraft extends AbstractAircraft {
       @return 射击出的子弹List
      */
     public List<BaseBullet> shoot() {
-        List<BaseBullet> res = new LinkedList<>();
+
+        if(this.shootStrategy==null)
+        { List<BaseBullet> res = new LinkedList<>();
         int x = this.getLocationX();
         /*
           子弹射击方向 (向上发射：1，向下发射：-1)
@@ -94,6 +103,11 @@ public class HeroAircraft extends AbstractAircraft {
             res.add(baseBullet);
         }
         return res;
+        }
+        else
+        {
+            return this.shootStrategy.shoot(getLocationX(),getLocationY(),getSpeedX(),getSpeedY(),shootSpeed,shootNum,power,direction);
+        }
     }
 
 }

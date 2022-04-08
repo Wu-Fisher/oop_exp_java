@@ -2,6 +2,7 @@ package edu.hitsz.aircraft;
 
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.*;
+import edu.hitsz.strategy.AbstractShootStrategy;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -67,5 +68,11 @@ public class EliteEnemy extends AbstractAircraft {
             res.add(baseBullet);
         }
         return res;
+    }
+    private AbstractShootStrategy shootStrategy;
+    @Override
+    public void setStrategy
+            (AbstractShootStrategy shootStrategy) {
+        this.shootStrategy = shootStrategy;
     }
 }

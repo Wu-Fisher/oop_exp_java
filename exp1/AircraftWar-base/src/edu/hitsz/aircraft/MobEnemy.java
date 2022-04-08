@@ -2,6 +2,7 @@ package edu.hitsz.aircraft;
 
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
+import edu.hitsz.strategy.AbstractShootStrategy;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -37,6 +38,12 @@ public class MobEnemy extends AbstractAircraft {
     @Override
     public List<BaseBullet> shoot() {
         return new LinkedList<>();
+    }
+    private AbstractShootStrategy shootStrategy;
+    @Override
+    public void setStrategy
+            (AbstractShootStrategy shootStrategy) {
+        this.shootStrategy = shootStrategy;
     }
 
 }

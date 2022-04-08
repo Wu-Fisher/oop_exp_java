@@ -2,6 +2,8 @@ package edu.hitsz.aircraft;
 
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.*;
+import edu.hitsz.strategy.AbstractShootStrategy;
+import edu.hitsz.strategy.SpreadShootStrategy;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,8 +18,10 @@ public class BossEnemy extends AbstractAircraft {
     /**
      * 子弹一次发射数量
      */
-    private int shootNum = 4;
-
+    private int shootNum = 3;
+    private int shootSpeed=10;
+    private int direction=1;
+    private AbstractShootStrategy shootStrategy=new SpreadShootStrategy();
     /**
      * 子弹伤害
      */
@@ -52,25 +56,37 @@ public class BossEnemy extends AbstractAircraft {
       @return 射击出的子弹List
      */
     public List<BaseBullet> shoot() {
-        List<BaseBullet> res = new LinkedList<>();
-        int x = this.getLocationX();
+        if(shootStrategy==null) {
+            List<BaseBullet> res = new LinkedList<>();
+            int x = this.getLocationX();
         /*
           子弹射击方向 (向上发射：1，向下发射：-1)
 
           <=====按照人类视角应该是写反了吧
 
          */
-        int direction = 1;
-        int y = this.getLocationY() + direction * 2;
-        int speedX = 0;
-        int speedY = this.getSpeedY() + direction * 10;
-        BaseBullet baseBullet;
-        for (int i = 0; i < shootNum; i++) {
-            // 子弹发射位置相对飞机位置向前偏移
-            // 多个子弹横向分散
-            baseBullet = new EnemyBullet(x + (i * 2 - shootNum + 1) * 10, y, speedX, speedY, power);
-            res.add(baseBullet);
+            int direction = 1;
+            int y = this.getLocationY() + direction * 2;
+            int speedX = 0;
+            int speedY = this.getSpeedY() + direction * 10;
+            BaseBullet baseBullet;
+            for (int i = 0; i < shootNum; i++) {
+                // 子弹发射位置相对飞机位置向前偏移
+                // 多个子弹横向分散
+                baseBullet = new EnemyBullet(x + (i * 2 - shootNum + 1) * 10, y, speedX, speedY, power);
+                res.add(baseBullet);
+            }
+            return res;
         }
-        return res;
+        else
+        {
+            return shootStrategy.shoot(getLocationX(),getLocationY(),getSpeedX(),getSpeedY(),shootSpeed,shootNum,power,direction);
+        }
+    }
+
+    @Override
+    public void setStrategy
+            (AbstractShootStrategy shootStrategy) {
+        this.shootStrategy = shootStrategy;
     }
 }
