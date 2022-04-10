@@ -3,6 +3,8 @@ package edu.hitsz.application;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.props.*;
+import edu.hitsz.scores.ScoreDao;
+import edu.hitsz.scores.ScoreDaolmpl;
 import edu.hitsz.basic.AbstractFlyingObject;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
@@ -13,6 +15,7 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.*;
 import edu.hitsz.strategy.*;
+
 /**
  * 游戏主面板，游戏启动
  *
@@ -46,6 +49,7 @@ public class Game extends JPanel {
     private boolean gameOverFlag = false;
     private int score = 0;
     private int time = 0;
+    private String playerName = "testPlayer";
     /**
      * 周期（ms)
      * 指示子弹的发射、敌机的产生频率
@@ -151,6 +155,9 @@ public class Game extends JPanel {
                 // 游戏结束
                 executorService.shutdown();
                 gameOverFlag = true;
+                ScoreDao scoreDao = new ScoreDaolmpl();
+                scoreDao.doAdd(playerName, score);
+                scoreDao.printRank();
                 System.out.println("Game Over!");
             }
 
@@ -303,8 +310,7 @@ public class Game extends JPanel {
 
                 if (probs instanceof BloodProps) {
                     heroAircraft.recoverHp(probs.getHp());
-                }
-                else if (probs instanceof BombProps) {
+                } else if (probs instanceof BombProps) {
                     probs.effectCrash();
                 } else if (probs instanceof BulletProps) {
                     probs.effectCrash();
