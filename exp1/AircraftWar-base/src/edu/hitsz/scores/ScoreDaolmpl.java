@@ -1,12 +1,12 @@
 package edu.hitsz.scores;
 
+import java.io.File;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -46,7 +46,7 @@ public class ScoreDaolmpl implements ScoreDao {
     public List<Score> getAllScores() {
         List<Score> scores = new ArrayList<Score>();
         try {
-            ObjectInputStream ois = new ObjectInputStream(new java.io.FileInputStream(fileName));
+            ObjectInputStream ois = new ObjectInputStream(new java.io.FileInputStream(new File(fileName)));
             Score sc = null;
             while ((sc = (Score) ois.readObject()) != null) {
                 scores.add(sc);
@@ -104,9 +104,11 @@ public class ScoreDaolmpl implements ScoreDao {
         System.out.println("排行榜");
         System.out.println("**********************");
         for (int i = 0; i < scores.size(); i++) {
-            System.out.println("第" + i + 1 + "名：" + scores.get(i).getName() + "," + scores.get(i).getScore() + ","
+            System.out.println("第" + Integer.toString(i + 1) + "名：" + scores.get(i).getName() + ","
+                    + scores.get(i).getScore() + ","
                     + scores.get(i).getDate());
         }
+        saveAllScores(scores);
     }
 
 }

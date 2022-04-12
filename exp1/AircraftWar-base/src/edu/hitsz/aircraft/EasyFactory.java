@@ -17,7 +17,7 @@ public class EasyFactory extends EnemyFactory {
                         (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2),
                         0,
                         8,
-                        30);
+                        60);
                 break;
             case "elite":
                 enemy = new EliteEnemy(
@@ -25,7 +25,7 @@ public class EasyFactory extends EnemyFactory {
                         (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1),
                         0,
                         6,
-                        60, 2, 10);
+                        120, 1, 20);
                 break;
             case "boss":
                 enemy = new BossEnemy(
@@ -33,7 +33,7 @@ public class EasyFactory extends EnemyFactory {
                         (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1),
                         2,
                         0,
-                        800, 6, 20);
+                        1500, 4, 20);
                 break;
             default:
                 break;
