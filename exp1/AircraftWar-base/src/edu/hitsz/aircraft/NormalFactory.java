@@ -23,14 +23,14 @@ public class NormalFactory extends EnemyFactory {
                     (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1) * 1,
                     0,
                     6,
-                    90, 3, 20);
+                    150, 2, 20);
         } else if (type.equals("boss")) {
             enemy = new BossEnemy(
                     (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.ELITE_ENEMY_IMAGE.getWidth())) * 1,
                     (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1) * 1,
-                    2,
+                    3,
                     0,
-                    600, 6, 20);
+                    1600, 2, 40);
         }
         return enemy;
     }

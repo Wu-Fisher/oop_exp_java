@@ -20,7 +20,7 @@ public class ScoreDaolmpl implements ScoreDao {
     }
 
     public ScoreDaolmpl(String fileName) {
-        this.fileName = fileName;
+        this.fileName = System.getProperty("user.dir") + "/src/edu/hitsz/scores/"+fileName+".txt";
     }
 
     public String getFileName() {
@@ -79,19 +79,36 @@ public class ScoreDaolmpl implements ScoreDao {
         String d = sdf.format(date);
         Score sc = new Score(score, d, name);
         List<Score> scores = getAllScores();
+
         scores.add(sc);
+        Collections.sort(scores, (Score s1, Score s2) -> s2.getScore() - s1.getScore());
         saveAllScores(scores);
     }
 
     @Override
     public void doDeleteByName(String name) {
         List<Score> scores = getAllScores();
+
         for (Score score : scores) {
             if (score.getName().equals(name)) {
                 scores.remove(score);
                 break;
             }
         }
+        Collections.sort(scores, (Score s1, Score s2) -> s2.getScore() - s1.getScore());
+        saveAllScores(scores);
+    }
+    @Override
+    public void doDelete(String name,String date) {
+        List<Score> scores = getAllScores();
+
+        for (Score score : scores) {
+            if (score.getName().equals(name)&&score.getDate().equals(date)) {
+                scores.remove(score);
+                break;
+            }
+        }
+        Collections.sort(scores, (Score s1, Score s2) -> s2.getScore() - s1.getScore());
         saveAllScores(scores);
     }
 
@@ -109,6 +126,20 @@ public class ScoreDaolmpl implements ScoreDao {
                     + scores.get(i).getDate());
         }
         saveAllScores(scores);
+    }
+
+    @Override
+    public ArrayList<String[]> outPut()
+    {
+        List<Score> scores = getAllScores();
+        Collections.sort(scores, (Score s1, Score s2) -> s2.getScore() - s1.getScore());
+        ArrayList<String[]> list = new ArrayList<String[]>();
+        for(int i=0;i<scores.size();i++)
+        {
+            String[] ss = new String[]{Integer.toString(i + 1),scores.get(i).getName(),Integer.toString(scores.get(i).getScore()),scores.get(i).getDate()};
+            list.add(ss);
+        }
+        return list;
     }
 
 }

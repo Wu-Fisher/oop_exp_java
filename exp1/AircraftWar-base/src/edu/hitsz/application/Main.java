@@ -1,7 +1,11 @@
 package edu.hitsz.application;
 
+
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * 程序入口
@@ -12,24 +16,59 @@ public class Main {
 
     public static final int WINDOW_WIDTH = 512;
     public static final int WINDOW_HEIGHT = 768;
+    private JPanel menu;
+    private JButton easyButton;
+    private JButton normalButton;
+    private JButton hardButton;
+    private JCheckBox voiceTurn;
+    private static JFrame frame=new JFrame("Aircraft War");;
+    private static boolean Voice = false;
+    public Main() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        easyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                    Voice= voiceTurn.isSelected();
+                    startGame(0,Voice);
+            }
+        });
+        normalButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Voice= voiceTurn.isSelected();
+                startGame(1,Voice);
+
+            }
+        });
+        hardButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Voice= voiceTurn.isSelected();
+                startGame(2,Voice);
+            }
+        });
+    }
 
     public static void main(String[] args) {
-
         System.out.println("Hello Aircraft War");
-
         // 获得屏幕的分辨率，初始化 Frame
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        JFrame frame = new JFrame("Aircraft War");
         frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         frame.setResizable(false);
         // 设置窗口的大小和位置,居中放置
         frame.setBounds(((int) screenSize.getWidth() - WINDOW_WIDTH) / 2, 0,
                 WINDOW_WIDTH, WINDOW_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        Game game = new Game();
-        frame.add(game);
+        Main main = new Main();
+        frame.add(main.menu);
         frame.setVisible(true);
+    }
+    public void startGame(int level,boolean voice){
+        menu.removeAll();
+        Game game = new Game(level,voice);
+        menu.add(game);
+        menu.repaint();
+        menu.revalidate();
         game.action();
     }
 }

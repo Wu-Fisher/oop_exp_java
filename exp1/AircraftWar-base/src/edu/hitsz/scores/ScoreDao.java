@@ -1,5 +1,6 @@
 package edu.hitsz.scores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ScoreDao {
@@ -14,5 +15,9 @@ public interface ScoreDao {
 
     void doDeleteByName(String name);
 
+    void doDelete(String name,String date);
+
     void printRank();
+
+    ArrayList<String[]> outPut();
 }

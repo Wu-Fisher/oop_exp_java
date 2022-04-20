@@ -3,8 +3,6 @@ package edu.hitsz.application;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.props.*;
-import edu.hitsz.scores.ScoreDao;
-import edu.hitsz.scores.ScoreDaolmpl;
 import edu.hitsz.basic.AbstractFlyingObject;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
@@ -22,7 +20,8 @@ import edu.hitsz.strategy.*;
  * @author hitsz
  */
 public class Game extends JPanel {
-
+    public static final int WINDOW_WIDTH = 512;
+    public static final int WINDOW_HEIGHT = 768;
     private int backGroundTop = 0;
 
     /**
@@ -49,6 +48,7 @@ public class Game extends JPanel {
     private boolean gameOverFlag = false;
     private int score = 0;
     private int time = 0;
+    private String levelChoose = "easy";
     private String playerName = "testPlayer";
     /**
      * 周期（ms)
@@ -62,17 +62,72 @@ public class Game extends JPanel {
     private int score_Elite = 40;
     private int score_Boss = 100;
 
-    private int precent_Props_Easy = 50;
+    private int precent_Props_Health = 50;
 
-    private int health_Easy_Up = 50;
-
-    private final Random random = new Random();
+    private int health_Up = 50;
 
     private int hero_hp = 1000;
     private int hero_shootnum = 2;
     private int power_hero = 30;
 
-    public Game() {
+    private final Random random = new Random();
+
+    void initGame(int level) {
+        switch (level) {
+            case 0:
+                enemyMaxNumber = 5;
+                bossScoreThreshold = 1200;
+                score_moe = 20;
+                score_Elite = 40;
+                score_Boss = 100;
+                precent_Props_Health = 50;
+                health_Up = 100;
+                hero_hp = 1000;
+                hero_shootnum = 1;
+                power_hero = 60;
+                levelChoose = "Easy";
+                enemyFactory = new EasyFactory();
+                propsFactory = new EasyProFactory();
+                break;
+            case 1:
+                enemyMaxNumber = 6;
+                bossScoreThreshold = 2000;
+                score_moe = 30;
+                score_Elite = 80;
+                score_Boss = 200;
+                precent_Props_Health = 20;
+                health_Up = 80;
+                hero_hp = 800;
+                hero_shootnum = 2;
+                power_hero = 40;
+                levelChoose = "Normal";
+                enemyFactory = new NormalFactory();
+                propsFactory = new NormalProFactory();
+                break;
+            case 2:
+                enemyMaxNumber = 7;
+                bossScoreThreshold = 3000;
+                score_moe = 40;
+                score_Elite = 100;
+                score_Boss = 300;
+                precent_Props_Health = 10;
+                health_Up = 60;
+                hero_hp = 500;
+                hero_shootnum = 2;
+                power_hero = 50;
+                levelChoose = "Hard";
+                enemyFactory = new HardFactory();
+                propsFactory = new HardProFactory();
+                break;
+            default:break;
+
+        }
+        AbstractProps.setHp(health_Up);
+    }
+    public Game(int chanllengeLevel,boolean voice) {
+
+        // 初始化游戏
+        initGame(chanllengeLevel);
         heroAircraft = HeroAircraft.getInstance(
                 Main.WINDOW_WIDTH / 2,
                 Main.WINDOW_HEIGHT - ImageManager.HERO_IMAGE.getHeight(),
@@ -85,9 +140,7 @@ public class Game extends JPanel {
         // 难度选择修改处
         // 简单模式工厂
         // 产生工厂，设定道具
-        enemyFactory = new EasyFactory();
-        propsFactory = new EasyProFactory();
-        AbstractProps.setHp(health_Easy_Up);
+
         /**
          * Scheduled 线程池，用于定时任务调度
          * 关于alibaba code guide：可命名的 ThreadFactory 一般需要第三方包
@@ -105,7 +158,7 @@ public class Game extends JPanel {
      * 游戏启动入口，执行游戏逻辑
      */
     public void action() {
-
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // 定时任务：绘制、对象产生、碰撞判定、击毁及结束判定
         Runnable task = () -> {
 
@@ -155,10 +208,20 @@ public class Game extends JPanel {
                 // 游戏结束
                 executorService.shutdown();
                 gameOverFlag = true;
-                ScoreDao scoreDao = new ScoreDaolmpl();
-                scoreDao.doAdd(playerName, score);
-                scoreDao.printRank();
+//                ScoreDao scoreDao = new ScoreDaolmpl();
+//                scoreDao.doAdd(playerName, score);
+//                scoreDao.printRank();
                 System.out.println("Game Over!");
+                this.setVisible(false);
+                JFrame frame = new JFrame("Result");
+                frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+                frame.setResizable(false);
+                // 设置窗口的大小和位置,居中放置
+                frame.setBounds(((int) screenSize.getWidth() - WINDOW_WIDTH) / 2, 0,
+                        WINDOW_WIDTH, WINDOW_HEIGHT);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.add(new Result(score,levelChoose).mainPanel);
+                frame.setVisible(true);
             }
 
         };
@@ -254,7 +317,6 @@ public class Game extends JPanel {
                 // 英雄机撞击到敌机子弹
                 // 英雄机损失一定生命值
                 heroAircraft.decreaseHp(bullet.getPower());
-
                 System.out.println("GET HIT!");
                 bullet.vanish();
             }
@@ -280,10 +342,10 @@ public class Game extends JPanel {
                         if (enemyAircraft instanceof BossEnemy) {
                             bossScoreThreshold *= bossScoreThreshold;
                             isBoss = false;
-                            score += 100;
+                            score += score_Boss;
                         } else if (enemyAircraft instanceof EliteEnemy) {
                             score += score_Elite;
-                            if (isPercent(precent_Props_Easy)) {
+                            if (isPercent(precent_Props_Health)) {
                                 int x = enemyAircraft.getLocationX();
                                 int y = enemyAircraft.getLocationY();
                                 leftProps.add(propsFactory.callProps(PropsSelector.selectoString_easy(), x, y));
@@ -406,5 +468,6 @@ public class Game extends JPanel {
             return false;
         }
     }
+
 
 }

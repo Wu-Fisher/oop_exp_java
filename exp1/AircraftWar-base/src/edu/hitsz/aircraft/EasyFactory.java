@@ -33,7 +33,7 @@ public class EasyFactory extends EnemyFactory {
                         (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1),
                         2,
                         0,
-                        1500, 4, 20);
+                        1000, 1, 20);
                 break;
             default:
                 break;
