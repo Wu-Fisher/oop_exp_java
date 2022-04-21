@@ -1,6 +1,7 @@
 package edu.hitsz.aircraft;
 
 import edu.hitsz.application.Main;
+import edu.hitsz.application.Menu;
 import edu.hitsz.bullet.*;
 import edu.hitsz.strategy.AbstractShootStrategy;
 import edu.hitsz.strategy.SpreadShootStrategy;

@@ -1,6 +1,7 @@
 import edu.hitsz.aircraft.*;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
+import edu.hitsz.application.Menu;
 import edu.hitsz.bullet.BaseBullet;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -81,7 +82,7 @@ class EliteEnemyTest {
     void forward() {
         System.out.println("--Test EliteAircraft forward--");
         System.out.println("判断敌机移动到边界后是否会自动失效：");
-        eliteEnemy.setLocation(0,Main.WINDOW_HEIGHT+100);
+        eliteEnemy.setLocation(0, Main.WINDOW_HEIGHT+100);
         eliteEnemy.forward();
         assumeTrue(eliteEnemy.notValid());
         System.out.println("--Test Success--");

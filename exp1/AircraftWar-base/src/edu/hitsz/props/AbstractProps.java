@@ -1,6 +1,7 @@
 package edu.hitsz.props;
 
 import edu.hitsz.application.Main;
+import edu.hitsz.application.Menu;
 import edu.hitsz.basic.AbstractFlyingObject;
 
 public abstract class AbstractProps extends AbstractFlyingObject {
