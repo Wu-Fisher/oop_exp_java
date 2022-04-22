@@ -50,11 +50,11 @@ public class HeroAircraft extends AbstractAircraft {
     }
 
     public static HeroAircraft getInstance(int locationX, int locationY, int speedX, int speedY, int hp) {
-        synchronized (HeroAircraft.class) {
+
             if (myHero == null) {
                 myHero = new HeroAircraft(locationX, locationY, speedX, speedY, hp);
             }
-        }
+
         return myHero;
     }
 

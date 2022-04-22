@@ -21,7 +21,8 @@ public class Result {
     private ScoreDao scoreDao;
     private DefaultTableModel model;
 
-    public Result(int Score,String level) {
+    public Result(int Score,int levels) {
+        String level = toString(levels);
         scoreDao = new ScoreDaolmpl(level);
         label.setText("难度："+level);
         String[]cloname={"排名","玩家名称","得分","记录日期"};
@@ -62,6 +63,22 @@ public class Result {
         List<String[]> list = scoreDao.outPut();
         for (String[] s:list){
             model.addRow(s);
+        }
+    }
+    String toString(int a)
+    {
+        switch (a)
+        {
+            case 0:
+                return "Easy";
+
+            case 1:
+                return "Normal";
+
+            case 2:
+                return "Hard";
+            default:
+                return "";
         }
     }
 }

@@ -4,6 +4,7 @@ import edu.hitsz.application.Main;
 import edu.hitsz.application.Menu;
 import edu.hitsz.bullet.*;
 import edu.hitsz.strategy.AbstractShootStrategy;
+import edu.hitsz.strategy.LineShootStrategy;
 import edu.hitsz.strategy.SpreadShootStrategy;
 
 import java.util.LinkedList;

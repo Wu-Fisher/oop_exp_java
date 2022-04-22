@@ -6,7 +6,7 @@ public class PropsSelector {
     static String[] propsTypes = { "blood", "bomb", "bullet" };
     static final Random random = new Random();
 
-    public static String selectoString_easy() {
+    public static String selectoString() {
         return propsTypes[(int) (random.nextInt(propsTypes.length))];
     }
 

@@ -7,7 +7,7 @@ public class EnemySelector {
     private static String[] enemyTypes = { "mob", "elite", "boss" };
     private static final Random random = new Random();
 
-    public static String selectoString_easy() {
+    public static String selectoString() {
         return enemyTypes[(int) (random.nextInt(enemyTypes.length-1))];
 
     }

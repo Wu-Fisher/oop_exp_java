@@ -18,7 +18,7 @@
           <component id="c1b4d" class="javax.swing.JButton" binding="easyButton">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="300" height="40"/>
+                <preferred-size width="300" height="60"/>
               </grid>
             </constraints>
             <properties>
@@ -28,7 +28,7 @@
           <component id="6130d" class="javax.swing.JButton" binding="normalButton">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="300" height="40"/>
+                <preferred-size width="300" height="60"/>
               </grid>
             </constraints>
             <properties>
@@ -38,7 +38,7 @@
           <component id="cfe2c" class="javax.swing.JButton" binding="hardButton">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="300" height="40"/>
+                <preferred-size width="300" height="60"/>
               </grid>
             </constraints>
             <properties>
@@ -47,10 +47,12 @@
           </component>
           <component id="2d331" class="javax.swing.JCheckBox" binding="voiceTurn">
             <constraints>
-              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="50" height="30"/>
+              </grid>
             </constraints>
             <properties>
-              <text value="CheckBox"/>
+              <text value="音量开关"/>
             </properties>
           </component>
         </children>

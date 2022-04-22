@@ -20,26 +20,44 @@ public class Menu
     private JButton normalButton;
     private JButton hardButton;
     private JCheckBox voiceTurn;
-    private static boolean Voice = false;
+    private boolean Voice = false;
+    private int level =0;
+    private boolean choose = false;
     public Menu() {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         easyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                    Voice= voiceTurn.isSelected();
+                level=0;
+                Voice= voiceTurn.isSelected();
+                choose = true;
             }
         });
         normalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                level=1;
+                Voice= voiceTurn.isSelected();
+                choose = true;
             }
         });
         hardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+
+                level=2;
                 Voice= voiceTurn.isSelected();
+                choose = true;
             }
         });
+    }
+    public int getLevel(){
+        return this.level;
+    }
+    public  boolean getVoice(){
+        return this.Voice;
+    }
+    public boolean getChoose(){
+        return this.choose;
     }
 
 
