@@ -107,14 +107,14 @@ public class Main {
             } catch (Exception e) {
             }
         }
+//        if(isVoice)
+//        game.musicPlayer.shotDownBgm();
         Score = game.getScore();
         synchronized (lock) {
             frame.remove(game);
             result = new Result(Score,getLevel());
             frame.add(result.mainPanel);
             frame.setVisible(true);
-
-
         }
     }
 

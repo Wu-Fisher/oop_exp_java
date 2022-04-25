@@ -25,6 +25,7 @@ public class MusicThread extends Thread {
     private String filename;
     private AudioFormat audioFormat;
     private byte[] samples;
+    public boolean isRunning = true;
 
     public MusicThread(String filename) {
         //初始化filename
@@ -78,22 +79,47 @@ public class MusicThread extends Thread {
         dataLine.start();
         try {
             int numBytesRead = 0;
-            while (numBytesRead != -1) {
+            while (numBytesRead != -1 && !isInterrupted()) {
 
                 //从音频流读取指定的最大数量的数据字节，并将其放入缓冲区中
                 numBytesRead =
                         source.read(buffer, 0, buffer.length);
+
+                if(isInterrupted())
+                {
+
+                    dataLine.drain();
+                    dataLine.close();
+                    return;
+                }
+
 				//通过此源数据行将数据写入混频器
                 if (numBytesRead != -1) {
                     dataLine.write(buffer, 0, numBytesRead);
                 }
-                sleep(400);
+//                if(isInterrupted())
+//                {
+//                    dataLine.drain();
+//                    dataLine.close();
+//                    return ;
+//                }
+//
+//               sleep(700);
+                if(!isRunning)
+                {
+                    dataLine.drain();
+                    dataLine.close();
+                    return;
+                }
             }
-        } catch (IOException | InterruptedException ex) {
+        } catch (IOException ex) {
+            dataLine.stop();
+            dataLine.drain();
+            dataLine.close();
             ex.printStackTrace();
         }
         // TODO Auto-generated catch block
-
+        dataLine.stop();
         dataLine.drain();
         dataLine.close();
 
@@ -102,6 +128,9 @@ public class MusicThread extends Thread {
     public void run() {
             InputStream stream = new ByteArrayInputStream(samples);
             play(stream);
+    }
+    public void setRunning(boolean a){
+        this.isRunning=a;
     }
 }
 

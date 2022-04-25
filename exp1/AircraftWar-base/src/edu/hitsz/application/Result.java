@@ -32,9 +32,10 @@ public class Result {
         table.setModel(model);
         ScrollPanel.setViewportView(table);
         String name = JOptionPane.showInputDialog("请输入姓名:", "testPlayer");
-        scoreDao.doAdd(name,Score);
-        update();
-
+        if(name!=null) {
+            scoreDao.doAdd(name, Score);
+            update();
+        }
         deButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
