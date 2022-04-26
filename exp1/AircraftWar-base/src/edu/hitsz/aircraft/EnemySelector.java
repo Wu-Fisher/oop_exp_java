@@ -8,8 +8,8 @@ public class EnemySelector {
     private static final Random random = new Random();
 
     public static String selectoString() {
-        int a = random.nextInt(10);
-        if (a < 3) {
+        int a = random.nextInt(100);
+        if (a < 15) {
             return enemyTypes[1];
         }
         else {

@@ -16,7 +16,7 @@ public class EasyFactory extends EnemyFactory {
                         (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.MOB_ENEMY_IMAGE.getWidth())),
                         (int) (Math.random() * Main.WINDOW_HEIGHT * 0.2),
                         0,
-                        8,
+                        4,
                         60);
                 break;
             case "elite":
@@ -24,8 +24,8 @@ public class EasyFactory extends EnemyFactory {
                         (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.ELITE_ENEMY_IMAGE.getWidth())),
                         (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1),
                         0,
-                        6,
-                        180, 1, 20);
+                        3,
+                        120, 1, 20);
                 break;
             case "boss":
                 enemy = new BossEnemy(
@@ -40,4 +40,9 @@ public class EasyFactory extends EnemyFactory {
         }
         return enemy;
     }
+    @Override
+     AbstractAircraft createEnemy(String type, double damageTimes, double healthTimes)
+    {
+        return createEnemy(type);
+    };
 }

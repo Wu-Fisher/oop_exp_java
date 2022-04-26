@@ -18,8 +18,8 @@ public class Result {
     private JScrollPane ScrollPanel;
     private JLabel label;
     private JLabel labe2;
-    private ScoreDao scoreDao;
-    private DefaultTableModel model;
+    private final ScoreDao scoreDao;
+    private final DefaultTableModel model;
 
     public Result(int Score,int levels) {
         String level = toString(levels);

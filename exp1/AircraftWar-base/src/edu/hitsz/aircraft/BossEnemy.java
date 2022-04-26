@@ -46,9 +46,7 @@ public class BossEnemy extends AbstractAircraft {
         if (locationY >= Main.WINDOW_HEIGHT) {
             vanish();
         }
-//        if (locationX <= 0 || locationX >= Main.WINDOW_WIDTH) {
-//            this.setSpeedX(-this.getSpeedX());
-//        }
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package edu.hitsz.aircraft;
 
+import edu.hitsz.application.Game;
 import edu.hitsz.application.Main;
 import edu.hitsz.application.Menu;
 import edu.hitsz.bullet.*;
@@ -75,5 +76,12 @@ public class EliteEnemy extends AbstractAircraft {
     public void setStrategy
             (AbstractShootStrategy shootStrategy) {
         this.shootStrategy = shootStrategy;
+    }
+    @Override
+    public void update(Game mg)
+    {
+//        this.decreaseHp(this.getHp());
+        this.vanish();
+        mg.score+=mg.score_Elite;
     }
 }

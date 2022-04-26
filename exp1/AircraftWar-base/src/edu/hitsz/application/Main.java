@@ -81,34 +81,46 @@ public class Main {
         // 初始化菜单
         Thread mt =  new menuThread();
         mt.start();
-        synchronized (lock){
+        synchronized (lock) {
             menu = new Menu();
             lock.notify();
-        frame.add(menu.menu);
-        frame.setVisible(true);
-        try {
+            frame.add(menu.menu);
+            frame.setVisible(true);
+            try {
 
-            lock.wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+                lock.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         Main.setIsVoice(Main.menu.getVoice());
         Main.setLevel(Main.menu.getLevel());
+        switch (Main.menu.getLevel()) {
+            case 0:
+                game= new EasyGame(isVoice);
+                break;
+            case 1:
+                game= new NormalGame(isVoice);
+                break;
+            case 2:
+                game= new HardGame(isVoice);
+                break;
 
+            default:game = new EasyGame(isVoice);
+                break;
         }
+
         synchronized (lock) {
             frame.remove(menu.menu);
-            game = new Game(Level, isVoice);
             frame.add(game);
             frame.setVisible(true);
             game.action();
             try {
                 lock.wait();
             } catch (Exception e) {
+
             }
         }
-//        if(isVoice)
-//        game.musicPlayer.shotDownBgm();
         Score = game.getScore();
         synchronized (lock) {
             frame.remove(game);
@@ -116,8 +128,7 @@ public class Main {
             frame.add(result.mainPanel);
             frame.setVisible(true);
         }
-    }
 
-}
+}}
 
 
