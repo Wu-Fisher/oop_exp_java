@@ -1,8 +1,9 @@
 @startuml
 'https://plantuml.com/class-diagram
-class Game {
+class Result {
+结果类
 }
-Game ..> ScoreDao
+Result --> ScoreDao
 class Score{
     - score:int
     - name:String
@@ -22,6 +23,7 @@ interface ScoreDao{
     + doAdd(String name, int score): void
     + doDeleteByName(String name):void 
     + printRank():void
+        + outPut():ArrayList<String[]>
 }
 
 class ScoreDaolmpl implements ScoreDao{
@@ -34,6 +36,7 @@ class ScoreDaolmpl implements ScoreDao{
     + doAdd(String name, int score): void
     + doDeleteByName(String name):void 
     + printRank():void
+    + outPut():ArrayList<String[]>
 
 }
 

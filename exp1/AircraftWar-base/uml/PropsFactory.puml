@@ -1,22 +1,30 @@
 @startuml
 'https://plantuml.com/class-diagram
-class Game{
+abstract class  Game{
 
 }
 
 abstract PropsFactory{
+    + game:Game
+    + PropsFactory(Game game)
     + callProps(String type, int x, int y):AbstractProps
     - {abstract} createProps(String type, int x, int y):AbstractProps
 
 }
 
 class EasyProFactory{
++ game:Game
+    + EasyProFactory(Game game)
     - createProps(String type, int x, int y):AbstractProps
 }
 class NormalProFactory {
++ game:Game
+    + NormalProFactory(Game game)
     - createProps(String type, int x, int y):AbstractProps
 }
 class HardProFactory {
++ game:Game
+    + HardProFactory(Game game)
     - createProps(String type, int x, int y):AbstractProps
 }
 
@@ -45,26 +53,35 @@ HardProFactory..>BombProps
 
 
 abstract class AbstractProps{
+    # hp:int
     + AbstractProps(int locationX, int locationY, int speedX, int speedY):void
+    + getHp():int
+    + setHp():void
+    + forward():void
     +{abstract}effectCrash():void
 }
 
 class BloodProps
 {
-    + BloodProps(int locationX, int locationY, int speedX, int speedY)
-    + effectCrash():void
++ BloodProps(int locationX, int locationY, int speedX, int speedY)
++ effectCrash():void
 }
 
 class BulletProps
 {
-    + BulletProps(int locationX, int locationY, int speedX, int speedY)
-    + effectCrash():void
+- mg:Game
++ BulletProps(int locationX, int locationY, int speedX, int speedY,Game game)
++ effectCrash():void
 }
 
 class BombProps
 {
-    + BombProps(int locationX, int locationY, int speedX, int speedY)
-    + effectCrash():void
+- mg:Game
+- subList:List<AbstractFlyingObject>
++ BombProps(int locationX, int locationY, int speedX, int speedY,Game game)
++ effectCrash():void
++ addList():void
++ notifyList():void
 }
 
 

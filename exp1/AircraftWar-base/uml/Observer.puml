@@ -1,0 +1,47 @@
+@startuml
+abstract class Game{}
+class BombProps
+{
+- mg:Game
+- subList:List<AbstractFlyingObject>
++ BombProps(int locationX, int locationY, int speedX, int speedY,Game game)
++ effectCrash():void
++ addList():void
++ notifyList():void
+}
+Game..>BombProps
+BombProps o-->AbstractFlyingObject
+
+abstract class AbstractFlyingObject
+{
++ update(Game game):void
+}
+abstract class AbstractAircraft extends AbstractFlyingObject
+{
+}
+class baseBullet extends AbstractFlyingObject
+{
+}
+
+class MobEnemy extends AbstractAircraft
+{
++ update(Game game):void
+}
+class EliteEnemy extends AbstractAircraft
+{
++ update(Game game):void
+}
+class BossEnemy extends AbstractAircraft
+{
++ update(Game game):void
+}
+
+class EnemyBullet extends baseBullet
+{
++ update(Game game):void
+}
+
+
+
+
+@enduml

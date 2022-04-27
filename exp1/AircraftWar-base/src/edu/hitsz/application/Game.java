@@ -65,7 +65,7 @@ public abstract class Game extends JPanel {
      * 指示子弹的发射、敌机的产生频率
      */
     public int cycleDuration = 800;
-    public int cycleDuration_b= 800;
+    public int cycleDuration_b = 800;
     private int cycleTime = 0;
     private int cycleTime_b = 0;
 
@@ -81,19 +81,21 @@ public abstract class Game extends JPanel {
     public int HERO_SHOOT_NUM = 2;
     public int HERO_SHOOT_DAMAGE = 30;
 
-    public int HERO_SHOOT_PRE=4;
-    public int ENEMY_SHOOT_PRE=12;
+    public int HERO_SHOOT_PRE = 4;
+    public int ENEMY_SHOOT_PRE = 12;
 
-    public double HEALTH_TIMES=1;
-    public double DAMAGE_TIMES=1;
+    public double HEALTH_TIMES = 1;
+    public double DAMAGE_TIMES = 1;
 
-    public BufferedImage BACKGROUND=ImageManager.BACKGROUND_IMAGE;
+    public BufferedImage BACKGROUND = ImageManager.BACKGROUND_IMAGE;
 
     public final MusicPlayer musicPlayer;
 
     private final Random random = new Random();
-// 游戏数据初始化
-    public abstract void   initGame();
+
+    // 游戏数据初始化
+    public abstract void initGame();
+
     public Game(boolean voice) {
 
         // 初始化游戏
@@ -135,21 +137,21 @@ public abstract class Game extends JPanel {
      */
     public void action() {
 
-            // 定时任务：绘制、对象产生、碰撞判定、击毁及结束判定
-            Runnable task = () -> {
-                synchronized (Main.lock){
+        // 定时任务：绘制、对象产生、碰撞判定、击毁及结束判定
+        Runnable task = () -> {
+            synchronized (Main.lock) {
 
-                    time += timeInterval;
+                time += timeInterval;
                 // 周期性执行（控制频率）
                 if (timeCountAndNewCycleJudge() && !gameOverFlag) {
                     // 新敌机产生
-                    if (!isBoss && score >= bossScoreThreshold && levelChoose!="Easy") {
+                    if (!isBoss && score >= bossScoreThreshold && levelChoose != "Easy") {
                         enemyAircrafts.add(enemyFactory.callEnemy("boss"));
                         isBoss = true;
                         musicPlayer.shotDownBgm();
                         musicPlayer.playBgmBoss();
                     } else if (enemyAircrafts.size() < enemyMaxNumber) {
-                        String str =selectEnemy();
+                        String str = selectEnemy();
                         enemyAircrafts.add(enemyFactory.callEnemy(str));
                     }
                     // // 飞机射出子弹-==
@@ -194,25 +196,24 @@ public abstract class Game extends JPanel {
                     Main.lock.notifyAll();
                 }
             }
-            };
+        };
 
         /**
          * 以固定延迟时间进行执行
          * 本次任务执行完成后，需要延迟设定的延迟时间，才会执行新的任务
          *
          */
-        new Thread(()->{
+        new Thread(() -> {
             while (!gameOverFlag) {
                 try {
                     levelChange();
                     Thread.sleep(3000);
-                }
-                catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }).start();
-        if(!gameOverFlag) {
+        if (!gameOverFlag) {
             musicPlayer.playBgm();
         }
         executorService.scheduleWithFixedDelay(task, timeInterval, timeInterval, TimeUnit.MILLISECONDS);
@@ -236,7 +237,7 @@ public abstract class Game extends JPanel {
     // 子弹射击频率更快
 
     private boolean timeCountAndNewCycleJudge_bullet() {
-        cycleTime_b += timeInterval*10;
+        cycleTime_b += timeInterval * 10;
         if (cycleTime_b >= cycleDuration_b && cycleTime_b - timeInterval < cycleTime_b) {
             // 跨越到新的周期
             cycleTime_b %= cycleDuration_b;
@@ -246,14 +247,14 @@ public abstract class Game extends JPanel {
         }
     }
 
-    public int elite_check=0;
-    public int hero_check=0;
+    public int elite_check = 0;
+    public int hero_check = 0;
 
     private void shootAction() {
         // TODO 敌机射击
 
         // enemyBullets.addAll(enemyAircrafts)
-        if (elite_check>= ENEMY_SHOOT_PRE) {
+        if (elite_check >= ENEMY_SHOOT_PRE) {
             for (AbstractAircraft en : enemyAircrafts) {
                 enemyBullets.addAll(en.shoot());
 
@@ -263,12 +264,10 @@ public abstract class Game extends JPanel {
             elite_check++;
         }
         // 英雄射击\
-        if(hero_check>=HERO_SHOOT_PRE) {
+        if (hero_check >= HERO_SHOOT_PRE) {
             heroBullets.addAll(heroAircraft.shoot());
-            hero_check=0;
-        }
-        else
-        {
+            hero_check = 0;
+        } else {
             hero_check++;
         }
 
@@ -313,7 +312,7 @@ public abstract class Game extends JPanel {
                 // 英雄机损失一定生命值
                 musicPlayer.playHit();
                 heroAircraft.decreaseHp(bullet.getPower());
-//                System.out.println("GET HIT!");
+                // System.out.println("GET HIT!");
                 bullet.vanish();
             }
         }
@@ -338,7 +337,7 @@ public abstract class Game extends JPanel {
                         // TODO 获得分数，产生道具补给
                         // boss 机坠毁
                         if (enemyAircraft instanceof BossEnemy) {
-                            bossScoreThreshold += (bossScoreThreshold+score);
+                            bossScoreThreshold += (bossScoreThreshold + score);
                             isBoss = false;
                             score += score_Boss;
                             musicPlayer.shotDownBgm();
@@ -384,7 +383,7 @@ public abstract class Game extends JPanel {
                     musicPlayer.playSupply();
                     probs.effectCrash();
                     // 多线程实现子弹增幅
-//                    Fire();
+                    // Fire();
                 }
                 probs.vanish();
             }
@@ -476,16 +475,19 @@ public abstract class Game extends JPanel {
             return false;
         }
     }
-    public boolean isOver(){
+
+    public boolean isOver() {
         return this.gameOverFlag;
     }
-    public int getScore()
-    {
+
+    public int getScore() {
         return this.score;
     }
 
-    public abstract void  levelChange();
-    public abstract  String selectEnemy();
+    public abstract void levelChange();
+
+    public abstract String selectEnemy();
+
     public abstract String selectProp();
 
 }

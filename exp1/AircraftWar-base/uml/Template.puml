@@ -1,0 +1,42 @@
+@startuml
+abstract class Game {
++ characters:Object
++ Game(boolean voice)
++ action():void
+- timeCountAndNewCycleJudge():boolean
+- timeCountAndNewCycleJudge_bullet():boolean
+- shootAction():void
+- bulletMoveAction():void
+- propsMoveAction():void
+- aircraftsMoveAction():void
+- crashCheckAction():void
+- postProcessAction():void
++ paint(Graphics g):void
++ {abstract}levelChange():void
++ {abstract}initGame():void
++ {abstract}selectEnemy():String
++ {abstract}selectProp():String
+
+
+}
+class EasyGame extends Game {
++ initGame():void
++ levelChange():void
++ selectEnemy():String
++ selectProp():String
+}
+class NormalGame extends Game {
++ initGame():void
++ levelChange():void
++ selectEnemy():String
++ selectProp():String
+
+}
+class HardGame extends Game {
++ initGame():void
++ levelChange():void
++ selectEnemy():String
++ selectProp():String
+
+}
+@enduml

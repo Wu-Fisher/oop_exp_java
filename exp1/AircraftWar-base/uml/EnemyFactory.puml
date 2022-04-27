@@ -1,11 +1,13 @@
 @startuml
 'https://plantuml.com/class-diagram
-class Game {
+abstract class Game {
++ enemyFactory:EnemyFactory
 }
 
 abstract class EnemyFactory{
     + callEnemy(String type):AbstractAircraft
     - {abstract}createEnemy(String type):AbstractAircraft
+    - {abstract}createEnemy(String type,double damageTimes, double healthTimes):AbstractAircraft
 }
 Game <-- EnemyFactory
 EnemyFactory<|-- EasyFactory
@@ -14,12 +16,16 @@ EnemyFactory<|-- HardFactory
 
 class EasyFactory{
     - createEnemy(String type):AbstractAircraft
+    - createEnemy(String type,double damageTimes, double healthTimes):AbstractAircraft
 }
 class NormalFactory{
     - createEnemy(String type):AbstractAircraft
+        - createEnemy(String type,double damageTimes, double healthTimes):AbstractAircraft
+
 }
 class HardFactory{
     - createEnemy(String type):AbstractAircraft
+        - createEnemy(String type,double damageTimes, double healthTimes):AbstractAircraft
 }
 
 abstract class AbstractAircraft{
@@ -42,49 +48,37 @@ HardFactory ..>  BossEnemy
 
 class MobEnemy {
     + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
-    ' + forward():void
-    ' + shoot():List<Bullet>
+    + forward():void
+    + shoot():List<Bullet>
+    + update(Game mg):void
 }
 
 class EliteEnemy
 {
 
-    ' - direction:int
-    ' - shootNum:int
-    ' - power:int
-    ' ' + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    - direction:int
+    - shootNum:int
+    - power:int
+    - shootStrategy:AbstractShootStrategy
     + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum, int power)
-    ' + forward():void
-    ' + shoot():List<Bullet>
+    + forward():void
+    + shoot():List<Bullet>
+    + setStrategy(AbstractShootStrategy shootStrategy):void\
+        + update(Game mg):void
 }
 
 class BossEnemy
 {
 
-    ' - direction:int
-    ' - shootNum:int
-    ' - power:int
-    ' ' + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp):void
+    - direction:int
+    - shootNum:int
+    - power:int
+    - shootStrategy:AbstractShootStrategy
     + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum, int power)
-    ' + forward():void
-    ' + shoot():List<Bullet>
+    + forward():void
+    + shoot():List<Bullet>
+    + setStrategy(AbstractShootStrategy shootStrategy):void
+        + update(Game mg):void
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @enduml

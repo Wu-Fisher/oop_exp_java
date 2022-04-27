@@ -24,6 +24,8 @@ abstract class AbstractFlyingObject
     + getHeight():int
     + notValid():boolean
     + vanish():void
+    + update(Game mg):void
+
 }
 abstract class AbstractAircraft
 {
@@ -33,7 +35,10 @@ abstract class AbstractAircraft
     + decreaseHp(int decrease):void
     + recoverHp(int recover):void
     + getHp():int
+    + getMaxHp():int
+    + setHp(int hp):void
     + {abstract} shoot():List<Bullet>
+    + {abstract} setStrategy(Strategy strategy):void
  }
 
 class BaseBullet
@@ -61,26 +66,27 @@ AbstractProps <|-- BombProps
 
 
 class HeroAircraft {
-    # axHp:int
+    # maxHp:int
     # hp:int
     - shootNum:int
     - power:int
     - direction:int
     - myHero:HeroAircraft
     - shootStrategy:AbstractShootStrategy
-    ' - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
     - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power)
-    ' + getInstance(int locationX, int locationY, int speedX, int speedY, int hp):AbstractAircraft
-    + {static} getInstance(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power):abstractAircraft
+    + {static} getInstance(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int Aircraft
     + forward():void
     + shoot():List<Bullet>
     + setStrategy(AbstractShootStrategy shootStrategy):void
+    + update(Game mg):void
 }
 
 class MobEnemy {
     + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + forward():void
     + shoot():List<Bullet>
+    + update(Game mg):void
+
 }
 
 class EliteEnemy
@@ -90,11 +96,11 @@ class EliteEnemy
     - shootNum:int
     - power:int
     - shootStrategy:AbstractShootStrategy
-    ' + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
     + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum, int power)
     + forward():void
     + shoot():List<Bullet>
-    + setStrategy(AbstractShootStrategy shootStrategy):void
+    + setStrategy(AbstractShootStrategy shootStrategy):void\
+        + update(Game mg):void
 }
 
 class BossEnemy
@@ -104,11 +110,11 @@ class BossEnemy
     - shootNum:int
     - power:int
     - shootStrategy:AbstractShootStrategy
-    ' + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp):void
     + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int shootnum, int power)
     + forward():void
     + shoot():List<Bullet>
     + setStrategy(AbstractShootStrategy shootStrategy):void
+        + update(Game mg):void
 }
 
 
@@ -116,11 +122,13 @@ class BossEnemy
 class HeroBullet {
     + HeroBullet(int locationX, int locationY,
      int speedX, int speedY, int power):void
+             + update(Game mg):void
 }
 
 class EnemyBullet {
     + EnemyBullet(int locationX, int locationY,
      int speedX, int speedY, int power):void
+             + update(Game mg):void
 }
 
 abstract class AbstractProps{
@@ -140,14 +148,20 @@ class BloodProps
 
 class BulletProps
 {
-+ BulletProps(int locationX, int locationY, int speedX, int speedY)
+- mg:Game
++ BulletProps(int locationX, int locationY, int speedX, int speedY,Game game)
 + effectCrash():void
 }
 
 class BombProps
 {
-+ BombProps(int locationX, int locationY, int speedX, int speedY)
+- mg:Game
+- subList:List<AbstractFlyingObject>
++ BombProps(int locationX, int locationY, int speedX, int speedY,Game game)
 + effectCrash():void
++ addList():void
++ notifyList():void
+
 }
 
 

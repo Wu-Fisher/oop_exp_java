@@ -2,18 +2,19 @@
 'https://plantuml.com/class-diagram
 
 class HeroAircraft {
-    # axHp:int
+    # maxHp:int
     # hp:int
     - shootNum:int
     - power:int
     - direction:int
     - myHero:HeroAircraft
-    ' - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+    - shootStrategy:AbstractShootStrategy
     - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power)
-    ' + getInstance(int locationX, int locationY, int speedX, int speedY, int hp):AbstractAircraft
-    + {static} getInstance(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int power):abstractAircraft
+    + {static} getInstance(int locationX, int locationY, int speedX, int speedY, int hp,int shootnum, int Aircraft
     + forward():void
     + shoot():List<Bullet>
+    + setStrategy(AbstractShootStrategy shootStrategy):void
+    + update(Game mg):void
 }
 
 
@@ -23,7 +24,7 @@ HeroAircraft -> HeroAircraft
 Game -> HeroAircraft
 
 
-class Game{
+abstract class Game{
 
 }
 
