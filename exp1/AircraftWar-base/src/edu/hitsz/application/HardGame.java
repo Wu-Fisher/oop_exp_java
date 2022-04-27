@@ -15,7 +15,7 @@ public class HardGame extends Game {
 
     @Override
     public void levelChange() {
-        if(this.score>=2000 && NOW_LEVEL==0)
+        if(this.score>=4000 && NOW_LEVEL==0)
         {
             NOW_LEVEL++;
             this.DAMAGE_TIMES+=0.1;
@@ -24,20 +24,20 @@ public class HardGame extends Game {
             System.out.println("伤害倍率："+DAMAGE_TIMES+" 生命倍率："+HEALTH_TIMES);
         }
         else if (
-                this.score>=3000 && NOW_LEVEL==1
+                this.score>=8000 && NOW_LEVEL==1
         )
         {
             NOW_LEVEL++;
             this.DAMAGE_TIMES+=0.1;
             this.HEALTH_TIMES+=0.1;
             this.ENEMY_SHOOT_PRE-=1;
-//        this.HERO_SHOOT_PRE-=1;
+
             System.out.println("难度提升！nowLevel:"+NOW_LEVEL);
             System.out.println("射速UP！！！！");
             System.out.println("伤害倍率："+DAMAGE_TIMES+" 生命倍率："+HEALTH_TIMES);
         }
         else if (
-                this.score>=5000 && NOW_LEVEL==2
+                this.score>=11000 && NOW_LEVEL==2
         )
         {
             NOW_LEVEL++;
@@ -49,13 +49,13 @@ public class HardGame extends Game {
             System.out.println("伤害倍率："+DAMAGE_TIMES+" 生命倍率："+HEALTH_TIMES);
 
         }
-        else if(this.score>=7000 && NOW_LEVEL==3)
+        else if(this.score>=15000 && NOW_LEVEL==3)
         {
             NOW_LEVEL++;
             this.DAMAGE_TIMES+=0.05;
             this.HEALTH_TIMES+=0.05;
             this.ENEMY_SHOOT_PRE-=1;
-//        this.HERO_SHOOT_PRE-=1;
+            this.HERO_SHOOT_PRE-=1;
             System.out.println("难度提升！nowLevel:"+NOW_LEVEL);
             System.out.println("射速UP！！！！");
             System.out.println("伤害倍率："+DAMAGE_TIMES+" 生命倍率："+HEALTH_TIMES);
@@ -95,21 +95,23 @@ public class HardGame extends Game {
     public void initGame()
     {
         enemyMaxNumber = 8;
-        bossScoreThreshold = 3000;
-        score_moe = 120;
+        bossScoreThreshold = 5000;
+        score_moe = 150;
         score_Elite = 250;
         score_Boss = 800;
-        precent_Props = 30;
+        precent_Props = 50;
         health_Up = 160;
-        HERO_HEALTH = 1500;
-        HERO_SHOOT_NUM = 2;
-        HERO_SHOOT_DAMAGE = 60;
+        HERO_HEALTH = 2000;
+        HERO_SHOOT_NUM = 3;
+        HERO_SHOOT_DAMAGE = 80;
         levelChoose = "Hard";
         enemyFactory = new HardFactory();
         propsFactory = new HardProFactory(this);
         BACKGROUND=ImageManager.BACKGROUND_IMAGE_FIVE;
-        cycleDuration=500;
+        cycleDuration=600;
         AbstractProps.setHp(health_Up);
+        ENEMY_SHOOT_PRE=15;
+        HERO_SHOOT_PRE=4;
     }
 
 }

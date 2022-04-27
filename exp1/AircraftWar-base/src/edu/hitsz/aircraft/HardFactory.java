@@ -31,7 +31,7 @@ public class HardFactory extends EnemyFactory {
                     (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1) * 1,
                     4,
                     0,
-                    8000, 3, 40);
+                    6000, 3, 40);
         }
         return enemy;
     }
@@ -59,7 +59,8 @@ public class HardFactory extends EnemyFactory {
                     (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1) * 1,
                     4,
                     0,
-                    (int)((8000+count*500)*healthTimes), 3, (int)(40*damageTimes));
+                    (int)((6000+count*500)*healthTimes), 3, (int)(40*damageTimes));
+            System.out.println("boss health:(未考虑倍率，但是计算boss机产生次数) " + (8000+count*500));
             count++;
             if(count!=0)
             {

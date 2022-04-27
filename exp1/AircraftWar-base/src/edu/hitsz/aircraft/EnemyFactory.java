@@ -8,7 +8,7 @@ public abstract class EnemyFactory {
     }
     public AbstractAircraft callEnemy(String type, double damageTimes, double healthTimes) {
         AbstractAircraft enemy = createEnemy(type,damageTimes,healthTimes);
-        System.out.println("生成敌机：" + enemy.getClass().getSimpleName());
+//        System.out.println("生成敌机：" + enemy.getClass().getSimpleName());
         return enemy;
     }
 

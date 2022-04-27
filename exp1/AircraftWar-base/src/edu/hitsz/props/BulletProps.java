@@ -33,7 +33,7 @@ public class BulletProps extends AbstractProps {
 
             try {
                 // 这里后续可以设置每个难度持续时间
-                Thread.sleep(5000);
+                Thread.sleep(7000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

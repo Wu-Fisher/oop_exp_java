@@ -19,7 +19,7 @@ public class NormalFactory extends EnemyFactory {
 
         } else if (type.equals("elite")) {
             enemy = new EliteEnemy(
-                    (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.ELITE_ENEMY_IMAGE.getWidth())) * 1,
+                    (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.ELITE_ENEMY_IMAGE.getWidth())),
                     (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1) * 1,
                     0,
                     4,
@@ -51,14 +51,14 @@ public class NormalFactory extends EnemyFactory {
                     (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1) * 1,
                     0,
                     4,
-                    (int)(240*healthTimes), 2, (int)(20*damageTimes));
+                    (int)(240*healthTimes), 1, (int)(20*damageTimes));
         } else if (type.equals("boss")) {
             enemy = new BossEnemy(
                     (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.ELITE_ENEMY_IMAGE.getWidth())) * 1,
                     (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1) * 1,
                     3,
                     0,
-                    (int)(6000*healthTimes), 2, (int)(40*damageTimes));
+                    (int)(4000*healthTimes), 2, (int)(40*damageTimes));
         }
         return enemy;
     }

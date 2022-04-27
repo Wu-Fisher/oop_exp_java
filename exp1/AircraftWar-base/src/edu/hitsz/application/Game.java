@@ -81,8 +81,8 @@ public abstract class Game extends JPanel {
     public int HERO_SHOOT_NUM = 2;
     public int HERO_SHOOT_DAMAGE = 30;
 
-    public int HERO_SHOOT_PRE = 4;
-    public int ENEMY_SHOOT_PRE = 12;
+    public int HERO_SHOOT_PRE = 6;
+    public int ENEMY_SHOOT_PRE = 16;
 
     public double HEALTH_TIMES = 1;
     public double DAMAGE_TIMES = 1;
@@ -145,14 +145,14 @@ public abstract class Game extends JPanel {
                 // 周期性执行（控制频率）
                 if (timeCountAndNewCycleJudge() && !gameOverFlag) {
                     // 新敌机产生
-                    if (!isBoss && score >= bossScoreThreshold && levelChoose != "Easy") {
-                        enemyAircrafts.add(enemyFactory.callEnemy("boss"));
+                    if (!isBoss && score >= bossScoreThreshold && !Objects.equals(levelChoose, "Easy")) {
+                        enemyAircrafts.add(enemyFactory.callEnemy("boss",DAMAGE_TIMES,HEALTH_TIMES));
                         isBoss = true;
                         musicPlayer.shotDownBgm();
                         musicPlayer.playBgmBoss();
                     } else if (enemyAircrafts.size() < enemyMaxNumber) {
                         String str = selectEnemy();
-                        enemyAircrafts.add(enemyFactory.callEnemy(str));
+                        enemyAircrafts.add(enemyFactory.callEnemy(str,DAMAGE_TIMES,HEALTH_TIMES));
                     }
                     // // 飞机射出子弹-==
                     // shootAction();
@@ -337,7 +337,7 @@ public abstract class Game extends JPanel {
                         // TODO 获得分数，产生道具补给
                         // boss 机坠毁
                         if (enemyAircraft instanceof BossEnemy) {
-                            bossScoreThreshold += (bossScoreThreshold + score);
+                            bossScoreThreshold += (score);
                             isBoss = false;
                             score += score_Boss;
                             musicPlayer.shotDownBgm();
@@ -383,7 +383,7 @@ public abstract class Game extends JPanel {
                     musicPlayer.playSupply();
                     probs.effectCrash();
                     // 多线程实现子弹增幅
-                    // Fire();
+
                 }
                 probs.vanish();
             }

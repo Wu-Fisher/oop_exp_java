@@ -100,16 +100,18 @@ public  void levelChange()
     score_moe = 100;
     score_Elite = 200;
     score_Boss = 500;
-    precent_Props = 40;
+    precent_Props = 60;
     health_Up = 200;
     HERO_HEALTH = 1200;
     HERO_SHOOT_NUM = 2;
-    HERO_SHOOT_DAMAGE = 40;
+    HERO_SHOOT_DAMAGE = 50;
     levelChoose = "Normal";
     enemyFactory = new NormalFactory();
     propsFactory = new NormalProFactory(this);
     BACKGROUND=ImageManager.BACKGROUND_IMAGE_TWO;
-    cycleDuration=600;
+    cycleDuration=700;
+    HERO_SHOOT_PRE=5;
+    ENEMY_SHOOT_PRE = 15;
     AbstractProps.setHp(health_Up);
 
 }
