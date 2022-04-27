@@ -24,6 +24,7 @@ public  void levelChange()
         this.HEALTH_TIMES+=0.1;
         System.out.println("难度提升！nowLevel:"+NOW_LEVEL);
         System.out.println("伤害倍率："+DAMAGE_TIMES+" 生命倍率："+HEALTH_TIMES);
+        musicPlayer.playLevelup();
     }
     else if (
         this.score>=3000 && NOW_LEVEL==1
@@ -37,6 +38,7 @@ public  void levelChange()
         System.out.println("难度提升！nowLevel:"+NOW_LEVEL);
         System.out.println("射速UP！！！！");
         System.out.println("伤害倍率："+DAMAGE_TIMES+" 生命倍率："+HEALTH_TIMES);
+        musicPlayer.playLevelup();
     }
     else if (
             this.score>=5000 && NOW_LEVEL==2
@@ -47,6 +49,7 @@ public  void levelChange()
         this.HEALTH_TIMES+=0.05;
         System.out.println("难度提升！nowLevel:"+NOW_LEVEL);
         System.out.println("伤害倍率："+DAMAGE_TIMES+" 生命倍率："+HEALTH_TIMES);
+        musicPlayer.playLevelup();
 
     }
     else if(this.score>=7000 && NOW_LEVEL==3)
@@ -60,6 +63,7 @@ public  void levelChange()
         System.out.println("射速UP！！！！");
         System.out.println("伤害倍率："+DAMAGE_TIMES+" 生命倍率："+HEALTH_TIMES);
         System.out.println("到达最大难度");
+        musicPlayer.playLevelup();
     }
 
 }

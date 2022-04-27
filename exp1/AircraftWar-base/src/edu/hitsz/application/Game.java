@@ -189,7 +189,7 @@ public abstract class Game extends JPanel {
                     executorService.shutdown();
                     musicPlayer.shotDownBgm();
                     musicPlayer.playOver();
-
+                    musicPlayer.shotDownBgm();
                     gameOverFlag = true;
                     System.out.println("Game Over!");
                     // 唤醒主线程

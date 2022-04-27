@@ -97,14 +97,6 @@ public class MusicThread extends Thread {
                 if (numBytesRead != -1) {
                     dataLine.write(buffer, 0, numBytesRead);
                 }
-//                if(isInterrupted())
-//                {
-//                    dataLine.drain();
-//                    dataLine.close();
-//                    return ;
-//                }
-//
-//               sleep(700);
                 if(!isRunning)
                 {
                     dataLine.drain();
@@ -113,13 +105,10 @@ public class MusicThread extends Thread {
                 }
             }
         } catch (IOException ex) {
-            dataLine.stop();
-            dataLine.drain();
-            dataLine.close();
             ex.printStackTrace();
         }
         // TODO Auto-generated catch block
-        dataLine.stop();
+
         dataLine.drain();
         dataLine.close();
 

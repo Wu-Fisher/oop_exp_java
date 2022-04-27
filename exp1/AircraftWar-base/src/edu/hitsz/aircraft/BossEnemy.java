@@ -1,5 +1,6 @@
 package edu.hitsz.aircraft;
 
+import edu.hitsz.application.Game;
 import edu.hitsz.application.Main;
 import edu.hitsz.application.Menu;
 import edu.hitsz.bullet.*;
@@ -89,4 +90,10 @@ public class BossEnemy extends AbstractAircraft {
             (AbstractShootStrategy shootStrategy) {
         this.shootStrategy = shootStrategy;
     }
+
+    @Override
+    public  void update(Game mg)
+    {
+    }
+
 }
