@@ -50,7 +50,7 @@ public class HardFactory extends EnemyFactory {
             enemy = new EliteEnemy(
                     (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.ELITE_ENEMY_IMAGE.getWidth())) * 1,
                     (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1) * 1,
-                    0,
+                    3,
                     5,
                     (int)(360*healthTimes), 2, (int)(60*damageTimes));
         } else if (type.equals("boss")) {
@@ -60,7 +60,7 @@ public class HardFactory extends EnemyFactory {
                     4,
                     0,
                     (int)((6000+count*500)*healthTimes), 3, (int)(40*damageTimes));
-            System.out.println("boss health:(未考虑倍率，但是计算boss机产生次数) " + (8000+count*500));
+            System.out.println("boss health:(未考虑倍率，但是计算boss机产生次数) " + (6000+count*500));
             count++;
             if(count!=0)
             {

@@ -40,13 +40,25 @@ public class EliteEnemy extends AbstractAircraft {
         this.shootNum = shootnum;
         this.power = power;
     }
+    private int DIST=0;
 
     @Override
     public void forward() {
-        super.forward();
+        locationX += speedX;
+        locationY += speedY;
+        DIST+=speedX>0?speedX:-speedX;
+        if (locationX <= 0 || locationX >= Main.WINDOW_WIDTH) {
+            // 横向超出边界后反向
+            speedX = -speedX;
+            DIST=0;
+        }
         // 判定 y 轴向下飞行出界
         if (locationY >= Main.WINDOW_HEIGHT) {
             vanish();
+        }
+        if(DIST>=Main.WINDOW_WIDTH/6) {
+            speedX = -speedX;
+            DIST=0;
         }
     }
 

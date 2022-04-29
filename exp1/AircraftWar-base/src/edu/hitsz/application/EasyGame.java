@@ -35,7 +35,7 @@ public class EasyGame extends Game{
         {
             return "bomb";
         }
-        else if (a<=30)
+        else if (a<=50)
         {
             return "bullet";
         }
@@ -54,8 +54,8 @@ public class EasyGame extends Game{
         score_Elite = 60;
         score_Boss = 200;
         precent_Props = 70;
-        health_Up = 100;
-        HERO_HEALTH = 1000;
+        health_Up = 200;
+        HERO_HEALTH = 2000;
         HERO_SHOOT_NUM = 1;
         HERO_SHOOT_DAMAGE = 60;
         levelChoose = "Easy";

@@ -81,11 +81,11 @@ public class HardGame extends Game {
     @Override
     public String selectProp() {
         int a = random.nextInt(100);
-        if (a < 10)
+        if (a < 40)
         {
             return "bomb";
         }
-        else if (a<=50)
+        else if (a<=80)
         {
             return "bullet";
         }
@@ -104,8 +104,8 @@ public class HardGame extends Game {
         score_Elite = 250;
         score_Boss = 800;
         precent_Props = 50;
-        health_Up = 160;
-        HERO_HEALTH = 2000;
+        health_Up = 400;
+        HERO_HEALTH = 2500;
         HERO_SHOOT_NUM = 3;
         HERO_SHOOT_DAMAGE = 80;
         levelChoose = "Hard";

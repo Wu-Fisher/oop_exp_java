@@ -49,7 +49,7 @@ public class NormalFactory extends EnemyFactory {
             enemy = new EliteEnemy(
                     (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.ELITE_ENEMY_IMAGE.getWidth())) * 1,
                     (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1) * 1,
-                    0,
+                    2,
                     4,
                     (int)(240*healthTimes), 1, (int)(20*damageTimes));
         } else if (type.equals("boss")) {

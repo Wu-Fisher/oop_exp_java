@@ -86,7 +86,7 @@ public  void levelChange()
         {
             return "bomb";
         }
-        else if (a<=40)
+        else if (a<=50)
         {
             return "bullet";
         }
@@ -105,8 +105,8 @@ public  void levelChange()
     score_Elite = 200;
     score_Boss = 500;
     precent_Props = 60;
-    health_Up = 200;
-    HERO_HEALTH = 1200;
+    health_Up = 300;
+    HERO_HEALTH = 2500;
     HERO_SHOOT_NUM = 2;
     HERO_SHOOT_DAMAGE = 50;
     levelChoose = "Normal";
