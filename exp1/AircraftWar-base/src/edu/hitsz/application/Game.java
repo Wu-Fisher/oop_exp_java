@@ -38,7 +38,7 @@ public abstract class Game extends JPanel {
     /**
      * 时间间隔(ms)，控制刷新频率
      */
-    public int timeInterval = 40;
+    private int timeInterval = 40;
 
     public HeroAircraft getHeroAircraft() {
         return heroAircraft;
@@ -52,7 +52,7 @@ public abstract class Game extends JPanel {
     public EnemyFactory enemyFactory;
     public PropsFactory propsFactory;
 
-    public int enemyMaxNumber = 5;
+    public int enemyMaxNumber;
     public int bossScoreThreshold = 1500;
     public boolean isBoss = false;
     public boolean gameOverFlag = false;

@@ -2,8 +2,8 @@ package edu.hitsz.aircraft;
 
 import edu.hitsz.application.Game;
 import edu.hitsz.application.Main;
-import edu.hitsz.application.Menu;
-import edu.hitsz.bullet.*;
+import edu.hitsz.bullet.BaseBullet;
+import edu.hitsz.bullet.EnemyBullet;
 import edu.hitsz.strategy.AbstractShootStrategy;
 
 import java.util.LinkedList;

@@ -1,7 +1,6 @@
 import edu.hitsz.aircraft.*;
 import edu.hitsz.application.ImageManager;
 import edu.hitsz.application.Main;
-import edu.hitsz.application.Menu;
 import edu.hitsz.bullet.BaseBullet;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

@@ -20,6 +20,7 @@ public class Menu
     private JButton normalButton;
     private JButton hardButton;
     private JCheckBox voiceTurn;
+    private JLabel TITTLE;
     private boolean Voice = false;
     private int level =0;
     private boolean choose = false;

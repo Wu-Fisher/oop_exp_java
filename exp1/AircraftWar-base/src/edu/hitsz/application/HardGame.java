@@ -103,7 +103,7 @@ public class HardGame extends Game {
         score_moe = 150;
         score_Elite = 250;
         score_Boss = 800;
-        precent_Props = 50;
+        precent_Props = 70;
         health_Up = 400;
         HERO_HEALTH = 2500;
         HERO_SHOOT_NUM = 3;

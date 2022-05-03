@@ -30,11 +30,11 @@ public class LineShootStrategy implements AbstractShootStrategy {
             // 子弹发射位置相对飞机位置向前偏移
             // 多个子弹横向分散
             if(direction==-1) {
-                baseBullet = new HeroBullet(mx + (i * 2 - shootNum + 1) * 10, my, mspeedX, mspeedY, power);
+                baseBullet = new HeroBullet(mx + (i * 2 - shootNum + 1) * 15, my, mspeedX, mspeedY, power);
             }
             else
             {
-                baseBullet = new EnemyBullet(mx + (i * 2 - shootNum + 1) * 10, my, mspeedX, mspeedY, power);
+                baseBullet = new EnemyBullet(mx + (i * 2 - shootNum + 1) * 15, my, mspeedX, mspeedY, power);
             }
             res.add(baseBullet);
         }

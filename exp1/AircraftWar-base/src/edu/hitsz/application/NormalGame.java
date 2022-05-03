@@ -104,11 +104,11 @@ public  void levelChange()
     score_moe = 100;
     score_Elite = 200;
     score_Boss = 500;
-    precent_Props = 60;
+    precent_Props = 80;
     health_Up = 300;
     HERO_HEALTH = 2500;
     HERO_SHOOT_NUM = 2;
-    HERO_SHOOT_DAMAGE = 50;
+    HERO_SHOOT_DAMAGE = 60;
     levelChoose = "Normal";
     enemyFactory = new NormalFactory();
     propsFactory = new NormalProFactory(this);

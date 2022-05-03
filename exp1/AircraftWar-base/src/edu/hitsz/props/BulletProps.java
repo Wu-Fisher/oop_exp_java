@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
 public class BulletProps extends AbstractProps {
     Game mg;
     HeroAircraft heroAircraft;
-    private ExecutorService shootExecutor;
+    private final ExecutorService shootExecutor;
     public BulletProps(int locationX, int locationY, int speedX, int speedY, Game game) {
         super(locationX, locationY, speedX, speedY);
         this.mg=game;

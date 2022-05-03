@@ -26,6 +26,11 @@ public class BombProps extends AbstractProps {
         subList.addAll(mg.enemyAircrafts);
         subList.addAll(mg.enemyBullets);
     }
+
+    public void deleteList()
+    {
+        subList=null;
+    }
     public void notifyList()
     {
         for(AbstractFlyingObject F:subList)

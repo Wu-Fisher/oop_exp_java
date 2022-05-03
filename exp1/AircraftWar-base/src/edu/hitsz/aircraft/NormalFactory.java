@@ -1,7 +1,4 @@
 package edu.hitsz.aircraft;
-
-// import edu.hitsz.application.Game;
-// import edu.hitsz.application.Main;
 import edu.hitsz.application.*;
 
 public class NormalFactory extends EnemyFactory {
@@ -23,14 +20,14 @@ public class NormalFactory extends EnemyFactory {
                     (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1) * 1,
                     0,
                     4,
-                    240, 2, 20);
+                    180, 2, 20);
         } else if (type.equals("boss")) {
             enemy = new BossEnemy(
                     (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.ELITE_ENEMY_IMAGE.getWidth())) * 1,
                     (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1) * 1,
                     3,
                     0,
-                    6000, 2, 40);
+                    2000, 2, 40);
         }
         return enemy;
     }
@@ -51,14 +48,14 @@ public class NormalFactory extends EnemyFactory {
                     (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1) * 1,
                     2,
                     4,
-                    (int)(240*healthTimes), 1, (int)(20*damageTimes));
+                    (int)(280*healthTimes), 1, (int)(20*damageTimes));
         } else if (type.equals("boss")) {
             enemy = new BossEnemy(
                     (int) (Math.random() * (Main.WINDOW_WIDTH - ImageManager.ELITE_ENEMY_IMAGE.getWidth())) * 1,
                     (int) (Math.random() * Main.WINDOW_HEIGHT * 0.1) * 1,
                     3,
                     0,
-                    (int)(4000*healthTimes), 2, (int)(40*damageTimes));
+                    (int)(4000*healthTimes), 1, (int)(40*damageTimes));
         }
         return enemy;
     }

@@ -25,9 +25,9 @@ public class SpreadShootStrategy implements AbstractShootStrategy {
             // 子弹发射位置相对飞机位置向前偏移
             // 多个子弹横向分散
             if (direction == 1) {
-                baseBullet = new EnemyBullet(x + (i * 2 - shootNum + 1) * 10, my, (int)(mspeedX * (i - shootNum ) / (shootNum)), mspeedY, power);
+                baseBullet = new EnemyBullet(x + (i * 2 - shootNum + 1) * 15, my, (int)(mspeedX * (i - shootNum ) / (shootNum)), mspeedY, power);
             } else {
-                baseBullet = new HeroBullet(x + (i * 2 - shootNum + 1) * 10, my, (int)(mspeedX * (i - shootNum ) / (shootNum)), mspeedY, power);
+                baseBullet = new HeroBullet(x + (i * 2 - shootNum + 1) * 15, my, (int)(mspeedX * (i - shootNum ) / (shootNum)), mspeedY, power);
             }
             res.add(baseBullet);
         }

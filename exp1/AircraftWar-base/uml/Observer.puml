@@ -7,6 +7,7 @@ class BombProps
 + BombProps(int locationX, int locationY, int speedX, int speedY,Game game)
 + effectCrash():void
 + addList():void
++ deleteList():void
 + notifyList():void
 }
 Game..>BombProps

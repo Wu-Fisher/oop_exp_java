@@ -53,7 +53,7 @@ public class EasyGame extends Game{
         score_moe = 20;
         score_Elite = 60;
         score_Boss = 200;
-        precent_Props = 70;
+        precent_Props = 90;
         health_Up = 200;
         HERO_HEALTH = 2000;
         HERO_SHOOT_NUM = 1;
